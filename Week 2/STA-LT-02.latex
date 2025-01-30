@@ -1,0 +1,62 @@
+\documentclass{article}
+\title{Statistics Lecture 02}
+\begin{document}
+\newpage
+\section{Skewness}
+    Skewness is how much a distribution is not symmetric.
+\subsection{Positive Skewness}
+    Positive skewness is when the tail is on the right side of the distribution.
+\subsection{Negative Skewness}
+    Negative skewness is when the tail is on the left side of the distribution.
+\section{Normal distribution}
+    Normal distribution is a symmetric distribution.
+Note: Parametric statistical tests assume normal distribution.
+\section{Accessing normality from skewness values}
+\subsection{A rule of thumb}
+    If the skewness is between -1 and 1, the distribution is approximately normal.
+\subsection{Transformation of Data}
+    If the data is not normal, we can transform it to make it normal.
+    Take the log to base 10, square root, or cube root of the data (only for postive skewness)
+    If the data s negatively skewed, square the data.
+    If this doesn't work, use non-parametric tests.
+\section{Normal distribution and standard deviation}
+    68.26\% of the data lies within 1 standard deviation of the mean.
+    95.45\% of the data lies within 2 standard deviations of the mean.
+    99.7\% of the data lies within 3 standard deviations of the mean.
+\subsection{Z-Score}
+    Z-Score is the number of standard deviations a data point is from the mean.
+    \begin{equation}
+        Z = \frac{X - \mu}{\sigma}
+    \end{equation}
+\subsection{The Three Standard Deviation Check}
+    If a data point is more than 3 standard deviations from the mean, it is an outlier.
+    These values should be scrutinised carefully.
+\section{Lecture Problem 1}
+    A variable X has a normal distribution with an arthimetic mean of 10 and a standard deviation of 2. What is the probability that any single observation of the variable X will lie between 5 and 13?
+    \begin{equation}
+        Z = \frac{X - \mu}{\sigma}
+        A = \frac{5 - 10}{2} = -2.5
+        B = \frac{13 - 10}{2} = 1.5
+    \end{equation}
+    \begin{equation}
+        P(A) = 0.4968
+        P(B) = 0.4332
+    \end{equation}
+\section{The Central Limit Theory}
+The Central Limit Theory states that the sampling distribution of the sample mean will be approximately normally distributed, regardless of the shape of the population distribution, if the sample size is large enough.
+\subsection{Z or t}
+Should you use the Z-score or t?
+If the sample size >= 30 and the standard deviation of the population is known, use the Z-score.
+If the sample size >= 30 and the standard deviation of the population is unknown, use the t-score.
+If the sample size < 30, use the t-score.
+\subsection{Lecture Problem 2}
+// fill in later
+\subsection{Sidenote: Degrees of Freedom}
+Degrees of freedom is the number of values in the final calculation of a statistic that are free to vary.
+\begin{equation}
+    df = n - 1
+\end{equation}
+We can use the above theory to calculate the
+95\% CONFIDENCE INTERVAL FOR THE POPULATION MEAN.
+To calculate the confidence interval we need to know what the standard error is.
+\end{document}
