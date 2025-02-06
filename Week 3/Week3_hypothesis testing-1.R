@@ -40,10 +40,11 @@ meadow_pc<-read.csv(file.choose(),  header=T, sep=",")
 #' package to split the histograms by factor (look back to the code from last week to see how to do 
 #' this). You will also need to load the psych package for sumary stats.
 
+library(lattice)
+library(psych)
 
-
-
-
+describe(meadow_pc)
+histogram(~pc|meadow, data=meadow_pc, main="")
 
 
 #' ### Testing the assumptions of normality and homogeneity
@@ -51,16 +52,18 @@ meadow_pc<-read.csv(file.choose(),  header=T, sep=",")
 #' non-parametric test. 
  
 #' #### QUESTION
-#' What would be your first assessment of normality based on the histograms, skew and kurtosis? 
+#' What would be your first assessment of normality based on the histograms, skew and kurtosis?
+#' normal
 #' Should we use a parametric or non-parametric test? NB: You may see a slightly different value of 
 #' skew if you run another statistical package but this is because the calculations can sometimes be 
 #' different between packages. 
+#' parametric
  
 #' You will also remember from last week that we can run a statistical test to examine normality - 
 #' we will use the Shapiro-Wilk test because we have < 2000 samples. Use the tapply function from 
 #' last week to run the test on both factors.
 
-
+tapply(meadow_pc$pc, meadow_pc$meadow, shapiro.test)
 
 
 
@@ -82,7 +85,7 @@ library(car)
 leveneTest(pc~meadow, data=meadow_pc, center=mean)
 
 #' #### QUESTION 
-#' What does the output of Levene's test mean?
+#' What does the output of Levene's test mean? Pr > 0.05
 #' We are given a number of values, Df refers to degrees of freedom (see Ian's lectures for more info
 #' on this but basically, it tells you something about the number of factors and the number of samples).
 #' An F value which is the test statistic and the p value which is 0.758. Unlike most statistical tests,
@@ -158,16 +161,16 @@ str(castor)
 #' Conduct the Shapiro-Wilk test to look at normality. Remember to load the packages that are 
 #' associated with the functions that you want to run. 
 
-
-
-
+describe(castor)
+histogram(~temp|active, data=castor)
+tapply(castor$temp, castor$beaver_no, shapiro.test)
 
 
 
 #' We know that our data are non-normal and so this means we have to use a non-parametric test. The 
 #' code to conduct a non-parametric t-test is as follows: 
 
-wilcox.test(castor$temp~castor$active, paired=F)
+wilcox.test(castor$temp~castor$active)
 
 #' You can see from the output that we have a test value, W and a p value which is much smaller than 
 #' 0.05. What does this tell you about the temperature of the animals when they are active and not 
@@ -195,7 +198,7 @@ hist(AS_temp$difference)
 shapiro.test(AS_temp$difference)
 
 #' ### QUESTION 
-#' Should we run a parametric or non-parametric test based on this data?
+#' Should we run a parametric or non-parametric test based on this data? parametric
 
 #' Let's run both of them in any event. Notice that we do not need to worry about homogenity of 
 #' variance for a paired test. 
