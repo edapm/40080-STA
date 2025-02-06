@@ -24,7 +24,7 @@ rm(list=ls())
 #' Import the data file:
 #' 
 ## ------------------------------------------------------------------------
-
+gastro<-read.csv(file.choose(), header=T, sep=",")
 
 #' 
 #' Take a look at the data that you have imported by clicking on the file in the Global Environment 
@@ -42,7 +42,12 @@ rm(list=ls())
 #' and the psych package for the describe code.
 #' 
 ## ------------------------------------------------------------------------
- 
+str(gastro)
+library(lattice)
+library(psych)
+describe(gastro)
+histogram(~eggs|zone,data=gastro, main="")
+boxplot(gastro$eggs~gastro$zone,ylab="Number of Eggs",xlab="Zone")
 
 #' 
 #' It would also be useful to look at our summary statistics including skew and kurtosis, but if we run 
@@ -58,26 +63,27 @@ rm(list=ls())
 #' page come up with all of the arguments that are contained in the function.*** Now, run the code below.
 #' 
 ## ------------------------------------------------------------------------
-
+describeBy(gastro$eggs, gastro$zone)
 
 #' 
 #' You will see that we have the eggs first followed by the zone. The code mat=T just tells R to keep the 
 #' output in a convenient matrix so that we can compare them. 
 #' 
 #' ### QUESTION
-#' What is your first thought on normality?
+#' What is your first thought on normality? normal
 #' 
 #' Let's double check our answer by running a Shapiro-Wilk test. You should know how to do this by 
 #' using the tapply function:
 #' 
 ## ------------------------------------------------------------------------
-
+tapply(gastro$eggs, gastro$zone, shapiro.test)
 
 #' Next, we need to test for homogeneity of variance. First you will need to load in the car package 
 #' and then add the code to test for homogeneity (i.e. Levene's test).
 #' 
 ## ------------------------------------------------------------------------
- 
+library(car)
+leveneTest(eggs~zone,data=gastro)
 
 #' 
 #' ### QUESTION
@@ -85,7 +91,8 @@ rm(list=ls())
 #' Conduct the test below. 
 #' 
 ## ------------------------------------------------------------------------
- 
+t.test(gastro$eggs~gastro$zone,var.equal=TRUE)
+
 
 #' 
 #' ## ADDITIONAL EXERCISES
