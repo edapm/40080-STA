@@ -1,20 +1,172 @@
 ---
 title: "40080 LC Statistics"
 author: "Ed Mason"
-date: "2025-01-30"
 output: html_document
 ---
+
+```{r setup, include=FALSE}
+library(lattice)
+library(ggplot2)
+library(pastecs)
+library(car)
+```
+
+Last updated: `r Sys.Date()`
 
 # Statistics Lecture 02, 30/01/2025
 
 ## Normal Distribution
 
-```{r setup, echo=FALSE}         
-height<-c(126,178,181,167,166,164,163,189,199,201,134)
-data<-data.frame(height)
-#hist(height, freq=FALSE, col="red")
-#lines(density(height), col="black")
+```{r}
 x <- seq(-4, 4, length=200)
 y <- dnorm(x, mean=0, sd=1)
 plot(x,y, type = "l", lwd = 2, xlim = c(-3.5,3.5))
 ```
+
+## Dataset samples
+
+```{r}
+#include sample height data in data frame
+height<-c(126,178,181,167,166)
+gender<-c("female","female","male","female","male")
+lat<-c(-43.67327,43.42426,51.79624,0.84228,-49.05650)
+long<-c(-114.51627,-95.23205,-43.43058,-91.71106,-23.16819)
+data<-data.frame(height,gender,lat,long)
+
+histogram(~height|gender,data=data, main="", col="red")
+```
+
+## Plot Geodata
+
+```{r}
+
+```
+
+# Statistics Lecture 03, 06/02/2025
+## Hypothesis Testing
+Are two samples similar or different?
+
+### Example: Agricultural Land Use
+```{r}
+lowland_clay_sample <- c(10,20,25,25,30,35,45,50,50,60)
+upland_limestone_sample <- c(25,30,30,40,40,50,50,60,60,65)
+percentage_meadow <- data.frame(lowland_clay_sample, upland_limestone_sample)
+```
+
+Statistical hypothesis testing gives an objective method to see if something is due to chance or is genuinely statistically significant
+
+### Six Stages
+1. State null hypothesis
+2. State alternative hypothesis
+3. Decide upon a rejection level (α)
+4. Conduct statistical test (Do the Maths)
+5. Determine whether to accept or reject the null hypothesis
+6. Draw a physical process-based conclusion from the results
+
+#### 1. State null hypothesis
+There is no significant difference between meadow percentage in lowland and upland areas.
+Hₒ: μ(lowland) = μ(upland)
+
+#### 2. State alternative hypothesis
+There **is** a significant difference between meadow percentage in lowland and upland areas.
+Hₐ: μ(lowland) != μ(upland)
+
+##### Non-directional or Directional Tests
+```{r}
+# make into table
+```
+| Non-directional | Directional   |
+| --------------- | ------------- |
+| Do NOT state which variable is greatest in Ha   | State which
+variable is
+greatest in |
+| Cell 1, Row 2   | Ha:
+μ(lowland) > μ(upland)
+or μ(lowland) < μ(upland) |
+
+#### 3. Decide upon a rejection level
+Probability of Hₒ being true = 0.024
+
+Probability of Hₐ being true = 0.976
+
+The purpose of this test is to find out which hypothesis **is most likely** to be correct. (Conclusions are probabilistic not absolute).
+
+##### Statistical significance levels
+- Usually scientists use α = 0.05 - the 95% statistical significance
+level (confidence level).
+- Leaves room for 5% error in our conclusion.
+- Second most commonly used is α = 0.01 - the 99% confidence
+level.
+
+###### Types of Error
+Type I Error - Should have retained Hₒ
+
+Type II Error - Should have rejected Hₒ
+
+95% level is the best level for the trade-off between Type I and Type II errors
+
+(90% more likely Type I; 99.9% more likely Type II)
+
+#### 4. Conduct Statistical Test
+Example: Ag. Land Use
+Problem: Comparing means between two samples
+
+I.e. Is there a significant difference between the two samples?
+
+## The Student's *t* test
+### Assumptions
+Before you do the test, have you satisfied the assumptions?
+
+  1. Each sample is taken from a population that is normally distributed
+
+  2. Interval/ratio data, cannot use data in categories
+  
+  3. Each observation is independent of the other observations in the same sample
+
+  4. The samples are taken from populations which have similar variances
+
+#### 1. Normality
+  1. Plot the data (Plot a histogram of each variable)
+```{r}
+# why is this splitting?
+# histogram(~lowland_clay_sample|upland_limestone_sample,data=percentage_meadow,main="")
+hist(percentage_meadow$lowland_clay_sample)
+hist(percentage_meadow$upland_limestone_sample)
+```
+ 2. Look at skewness values
+```{r}
+stat.desc(percentage_meadow$lowland_clay_sample)
+stat.desc(percentage_meadow$upland_limestone_sample)
+```
+ 3. Calculate Z score of skewness statistic
+ 4. The Kolmogorov-Smirnov Test (K-S Test)
+
+#### 4. Similarity of Variances
+The *t* test -> comparing arithmetic means of two samples
+
+So samples need an equal variance
+
+**Rule:** Variances must differ by less than a factor of two
+
+Formal test for this -> Levene's Test
+
+For the example:
+```{r, include=FALSE}
+# Err: Levene's test is not appropriate with quantitative explanatory variables
+# leveneTest(lowland_clay_sample~upland_limestone_sample, data=percentage_meadow)
+```
+
+### Pick which form of test
+One- or two-sample test (comparison to popln. mean or one another)
+
+Independent samples or Paired samples (samples are independent of each other or are paired - measured at the same time)
+
+$$
+t = \frac{\text{difference between the means}}{\text{standard error of the difference}}
+$$
+Lowland Clay: Arithmetic Mean = 35% Standard Deviation = 15.81% Number of Observations = 10
+
+Upland Limestone:  Arithmetic Mean = 45% Standard Deviation = 14.14% Number of Observations = 10
+
+
+
