@@ -43,10 +43,13 @@ histogram(~height|gender,data=data, main="", col="red")
 ```
 
 # Statistics Lecture 03, 06/02/2025
+
 ## Hypothesis Testing
+
 Are two samples similar or different?
 
 ### Example: Agricultural Land Use
+
 ```{r}
 lowland_clay_sample <- c(10,20,25,25,30,35,45,50,50,60)
 upland_limestone_sample <- c(25,30,30,40,40,50,50,60,60,65)
@@ -56,35 +59,36 @@ percentage_meadow <- data.frame(lowland_clay_sample, upland_limestone_sample)
 Statistical hypothesis testing gives an objective method to see if something is due to chance or is genuinely statistically significant
 
 ### Six Stages
-1. State null hypothesis
-2. State alternative hypothesis
-3. Decide upon a rejection level (α)
-4. Conduct statistical test (Do the Maths)
-5. Determine whether to accept or reject the null hypothesis
-6. Draw a physical process-based conclusion from the results
+
+1.  State null hypothesis
+2.  State alternative hypothesis
+3.  Decide upon a rejection level (α)
+4.  Conduct statistical test (Do the Maths)
+5.  Determine whether to accept or reject the null hypothesis
+6.  Draw a physical process-based conclusion from the results
 
 #### 1. State null hypothesis
-There is no significant difference between meadow percentage in lowland and upland areas.
-Hₒ: μ(lowland) = μ(upland)
+
+There is no significant difference between meadow percentage in lowland and upland areas. Hₒ: μ(lowland) = μ(upland)
 
 #### 2. State alternative hypothesis
-There **is** a significant difference between meadow percentage in lowland and upland areas.
-Hₐ: μ(lowland) != μ(upland)
+
+There **is** a significant difference between meadow percentage in lowland and upland areas. Hₐ: μ(lowland) != μ(upland)
 
 ##### Non-directional or Directional Tests
+
 ```{r}
 # make into table
 ```
-| Non-directional | Directional   |
-| --------------- | ------------- |
-| Do NOT state which variable is greatest in Ha   | State which
-variable is
-greatest in |
-| Cell 1, Row 2   | Ha:
-μ(lowland) > μ(upland)
-or μ(lowland) < μ(upland) |
+
+| Non-directional                               | Directional |
+|-----------------------------------------------|-------------|
+| Do NOT state which variable is greatest in Ha | State which |
+
+variable is greatest in \| \| Cell 1, Row 2 \| Ha: μ(lowland) \> μ(upland) or μ(lowland) \< μ(upland) \|
 
 #### 3. Decide upon a rejection level
+
 Probability of Hₒ being true = 0.024
 
 Probability of Hₐ being true = 0.976
@@ -92,13 +96,13 @@ Probability of Hₐ being true = 0.976
 The purpose of this test is to find out which hypothesis **is most likely** to be correct. (Conclusions are probabilistic not absolute).
 
 ##### Statistical significance levels
-- Usually scientists use α = 0.05 - the 95% statistical significance
-level (confidence level).
-- Leaves room for 5% error in our conclusion.
-- Second most commonly used is α = 0.01 - the 99% confidence
-level.
+
+-   Usually scientists use α = 0.05 - the 95% statistical significance level (confidence level).
+-   Leaves room for 5% error in our conclusion.
+-   Second most commonly used is α = 0.01 - the 99% confidence level.
 
 ###### Types of Error
+
 Type I Error - Should have retained Hₒ
 
 Type II Error - Should have rejected Hₒ
@@ -108,65 +112,233 @@ Type II Error - Should have rejected Hₒ
 (90% more likely Type I; 99.9% more likely Type II)
 
 #### 4. Conduct Statistical Test
-Example: Ag. Land Use
-Problem: Comparing means between two samples
+
+Example: Ag. Land Use Problem: Comparing means between two samples
 
 I.e. Is there a significant difference between the two samples?
 
 ## The Student's *t* test
+
 ### Assumptions
+
 Before you do the test, have you satisfied the assumptions?
 
-  1. Each sample is taken from a population that is normally distributed
+1.  Each sample is taken from a population that is normally distributed
 
-  2. Interval/ratio data, cannot use data in categories
-  
-  3. Each observation is independent of the other observations in the same sample
+2.  Interval/ratio data, cannot use data in categories
 
-  4. The samples are taken from populations which have similar variances
+3.  Each observation is independent of the other observations in the same sample
+
+4.  The samples are taken from populations which have similar variances
 
 #### 1. Normality
-  1. Plot the data (Plot a histogram of each variable)
+
+1.  Plot the data (Plot a histogram of each variable)
+
 ```{r}
 # why is this splitting?
 # histogram(~lowland_clay_sample|upland_limestone_sample,data=percentage_meadow,main="")
 hist(percentage_meadow$lowland_clay_sample)
 hist(percentage_meadow$upland_limestone_sample)
 ```
- 2. Look at skewness values
+
+2.  Look at skewness values
+
 ```{r}
 stat.desc(percentage_meadow$lowland_clay_sample)
 stat.desc(percentage_meadow$upland_limestone_sample)
 ```
- 3. Calculate Z score of skewness statistic
- 4. The Kolmogorov-Smirnov Test (K-S Test)
+
+3.  Calculate Z score of skewness statistic
+4.  The Kolmogorov-Smirnov Test (K-S Test)
 
 #### 4. Similarity of Variances
-The *t* test -> comparing arithmetic means of two samples
+
+The *t* test -\> comparing arithmetic means of two samples
 
 So samples need an equal variance
 
 **Rule:** Variances must differ by less than a factor of two
 
-Formal test for this -> Levene's Test
+Formal test for this -\> Levene's Test
 
 For the example:
+
 ```{r, include=FALSE}
 # Err: Levene's test is not appropriate with quantitative explanatory variables
 # leveneTest(lowland_clay_sample~upland_limestone_sample, data=percentage_meadow)
 ```
 
 ### Pick which form of test
+
 One- or two-sample test (comparison to popln. mean or one another)
 
 Independent samples or Paired samples (samples are independent of each other or are paired - measured at the same time)
 
 $$
 t = \frac{\text{difference between the means}}{\text{standard error of the difference}}
+$$ Lowland Clay: Arithmetic Mean = 35% Standard Deviation = 15.81% Number of Observations = 10
+
+Upland Limestone: Arithmetic Mean = 45% Standard Deviation = 14.14% Number of Observations = 10
+
+# Statistics Lecture 04, 13/02/2025
+
+## Anaylsis of Variance (ANOVA)
+
+ANOVA determines whether the means of several populations are equal.
+
+NB. Student's *t* test compares the means of two samples **only**.
+
+### Two forms of ANOVA
+
+1.  One-way ANOVA **i. Independent samples (THIS LECTURE)**
+
+<!-- -->
+
+ii. Paired samples (Repeated Measures ANOVA)
+
+<!-- -->
+
+2.  Two-way ANOVA
+
+### One-way ANOVA: Independent Samples
+
+-   Each observation is classified into one sample or another based on ONE criterion.
+
+E.g. crop yield per acre obtained on different soil types
+
+```{r}
+soil_type <- c('A','A','A','A','A','B','B','B','B','B','C','C','C','C','C')
+as.factor(soil_type)
+crop_yield <- c(24,27,21,22,26,17,25,24,19,28,19,18,22,24,23)
+table1 <- data.frame(soil_type, crop_yield)
+```
+
+ANOVA separates the total variance into two components:
+
+1.  Variance between the samples
+
+2.  Variance within the samples
+
 $$
-Lowland Clay: Arithmetic Mean = 35% Standard Deviation = 15.81% Number of Observations = 10
+\text{Total variance} = \text{Variance between samples} + \text{Variance within samples}
+\newline
+\text{TSS} = \text{SSC} + \text{SSE}
+$$
 
-Upland Limestone:  Arithmetic Mean = 45% Standard Deviation = 14.14% Number of Observations = 10
+#### Assumptions of ANOVA
 
+1.  The errors (residuals) are normally distributed. This is more likely to be achieved when random samples from normal populations are used. For each sample:
 
+-   Plot a histogram
+-   Calculate the skewness value
+-   Calculate the Z score of skewness
+-   Perform either the K-S test or the Shapiro-Wilk test
 
+2.  The normal populations all have an equal or COMMON VARIANCE.
+
+-   Variance ratio
+-   Levene's Test
+
+NB. If you cannot satisfy these assumptions, you need to do another test (see end of lecture).
+
+#### Reminder: What is Variance?
+
+$$
+\text{Variance} = (\text{Standard Deviation})^2 = σ^2
+$$
+
+##### Calculating the Total Sum of Squares
+
+The Total Sum of Squares (TSS) is the sum of the squared differences between each observation and the overall mean.
+
+##### Calculating the Sum of Squares Between the Columns (SSC)
+
+SSC -\> The variation between the samples
+
+$$
+\text{SSC} = \sum_{i=1}^{k} n_i(\bar{X}_i - \bar{X})^2
+$$
+
+If SSC is small, the samples have similar means.
+
+IF SSC is large, the samples have different means.
+
+If SSC is zero, the samples have the same mean.
+
+##### Calculating the Error Sum of Squares (SSE)
+
+SSE -\> The variation within the samples
+
+$$
+\text{SSE} = 
+$$ High SSE means similar variations within the samples.
+
+Low SSE means different variations (more spread) within the samples.
+
+#### Worked Example
+
+$$
+\text{TSS} = \text{SSC} + \text{SSE}
+\newline
+153.6 = 19.6 + 134.0
+$$
+
+```{r}
+19.6 + 134.0
+```
+
+#### ANOVA Table
+Need to use Degrees of Freedom to calculate the Mean Sum of Squares
+
+Then we can run Snedecor’s Variance Ratio Test (*F*)
+
+$$
+F = \frac{\text{Mean Sum of Squares between samples}}{\text{Mean Sum of Squares within samples}} = \frac{\text{Systematic Differences}}{\text{Random Variations}}
+$$
+
+$$
+\begin{table}[]
+\begin{tabular}{|c|c|lll}
+\cline{1-2}
+F   value        & Meaning                                              &  &  &  \\ \cline{1-2}
+Less   than 1    & More   variance within samples than between samples  &  &  &  \\ \cline{1-2}
+1                & Variance   within samples = Variance between samples &  &  &  \\ \cline{1-2}
+Greater   than 1 & More   variance between samples than within samples  &  &  &  \\ \cline{1-2}
+\end{tabular}
+\end{table}
+$$
+
+#### Conclusions
+1. The null hypothesis must be retained.
+2. There is no significant difference in crop yields between the three soil types.
+3. The differences observed between the samples are a product of random chance and do not reflect a real difference in crop yield with soil type.
+
+### Arranging In R
+Values in one column, factor in another
+(see table1)
+
+```{r}
+print(table1)
+res<-aov(crop_yield~soil_type, data = table1)
+summary(res)
+boxplot(crop_yield~soil_type, data = table1)
+```
+### What if Assumptions are not met?
+1. Transform all of the samples (e.g. log base 10) and then test assumptions again
+2. Use a non-parametric test (e.g. Kruskal-Wallis Test)
+
+### Kruskal-Wallis Test
+Only use if you CANNOT use a parametric test
+```{r}
+kruskal.test(crop_yield~soil_type, data = table1)
+```
+The bigger the value, the bigger the difference between the samples
+
+### Post-hoc Tests
+If you have more than two samples, you need to do a post-hoc test to see which samples are different from each other
+
+#### Tukey Test
+```{r}
+TukeyHSD(res)
+```
