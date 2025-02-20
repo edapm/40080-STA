@@ -1,0 +1,5 @@
+Household_size	Exeter	Exmouth
+1	44	33
+2	81	40
+3	45	18
+4+	30	9

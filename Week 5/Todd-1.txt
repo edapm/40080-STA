@@ -1,0 +1,6 @@
+Behaviours	Zero	Small	Large
+Observing	2549	2551	2554
+Feeding and chewing	980	1000	1009
+Playing	550	612	816
+Grooming	765	510	449
+Resting and Sleeping	716	628	587
