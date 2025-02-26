@@ -355,7 +355,7 @@ display: none;
 </div>
 
 
-<p>Last updated: 2025-02-20</p>
+<p>Last updated: 2025-02-26</p>
 <div id="statistics-lecture-02-30012025" class="section level1">
 <h1>Statistics Lecture 02, 30/01/2025</h1>
 <div id="normal-distribution" class="section level2">
@@ -415,23 +415,33 @@ lowland and upland areas. Hₒ: μ(lowland) = μ(upland)</p>
 percentage in lowland and upland areas. Hₐ: μ(lowland) != μ(upland)</p>
 <div id="non-directional-or-directional-tests" class="section level5">
 <h5>Non-directional or Directional Tests</h5>
-<pre class="r"><code># make into table</code></pre>
 <table>
+<colgroup>
+<col width="12%" />
+<col width="43%" />
+<col width="44%" />
+</colgroup>
 <thead>
 <tr class="header">
+<th></th>
 <th>Non-directional</th>
 <th>Directional</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>Do NOT state which variable is greatest in Ha</td>
-<td>State which</td>
+<td></td>
+<td><strong>Do NOT</strong> state which variable is greatest in Hₐ</td>
+<td>State which variable is greatest in Hₐ: μ(lowland) &gt; μ(upland) OR
+μ(lowland) &lt; μ(upland)</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>Two-tailed test</td>
+<td>One-tailed test</td>
 </tr>
 </tbody>
 </table>
-<p>variable is greatest in | | Cell 1, Row 2 | Ha: μ(lowland) &gt;
-μ(upland) or μ(lowland) &lt; μ(upland) |</p>
 </div>
 </div>
 <div id="decide-upon-a-rejection-level" class="section level4">
@@ -662,22 +672,32 @@ F = \frac{\text{Mean Sum of Squares between samples}}{\text{Mean Sum of
 Squares within samples}} = \frac{\text{Systematic
 Differences}}{\text{Random Variations}}
 \]</span></p>
-<p><span class="math display">\[
-\begin{table}[]
-\begin{tabular}{|c|c|lll}
-\cline{1-2}
-F   value        &amp;
-Meaning                                              &amp;  &amp;  &amp;  \\
-\cline{1-2}
-Less   than 1    &amp; More   variance within samples than between
-samples  &amp;  &amp;  &amp;  \\ \cline{1-2}
-1                &amp; Variance   within samples = Variance between
-samples &amp;  &amp;  &amp;  \\ \cline{1-2}
-Greater   than 1 &amp; More   variance between samples than within
-samples  &amp;  &amp;  &amp;  \\ \cline{1-2}
-\end{tabular}
-\end{table}
-\]</span></p>
+<table>
+<colgroup>
+<col width="20%" />
+<col width="79%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>F value</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Less than 1</td>
+<td>More variance within samples than between samples</td>
+</tr>
+<tr class="even">
+<td>1</td>
+<td>Variance within samples equals variance between samples</td>
+</tr>
+<tr class="odd">
+<td>Greater than 1</td>
+<td>More variance between samples than within samples</td>
+</tr>
+</tbody>
+</table>
 </div>
 <div id="conclusions" class="section level4">
 <h4>Conclusions</h4>

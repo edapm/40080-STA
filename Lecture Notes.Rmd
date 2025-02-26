@@ -77,15 +77,12 @@ There **is** a significant difference between meadow percentage in lowland and u
 
 ##### Non-directional or Directional Tests
 
-```{r}
-# make into table
-```
+|               | Non-directional                                      | Directional                                            |
+|--------------|--------------------------------------------------|---------------------------------------------------|
+|              | **Do NOT** state which variable is greatest in Hₐ | State which variable is greatest in Hₐ:  μ(lowland) > μ(upland) OR μ(lowland) < μ(upland)     |
+|              | Two-tailed test                                  | One-tailed test                                   |
 
-| Non-directional                               | Directional |
-|-----------------------------------------------|-------------|
-| Do NOT state which variable is greatest in Ha | State which |
 
-variable is greatest in \| \| Cell 1, Row 2 \| Ha: μ(lowland) \> μ(upland) or μ(lowland) \< μ(upland) \|
 
 #### 3. Decide upon a rejection level
 
@@ -297,17 +294,12 @@ $$
 F = \frac{\text{Mean Sum of Squares between samples}}{\text{Mean Sum of Squares within samples}} = \frac{\text{Systematic Differences}}{\text{Random Variations}}
 $$
 
-$$
-\begin{table}[]
-\begin{tabular}{|c|c|lll}
-\cline{1-2}
-F   value        & Meaning                                              &  &  &  \\ \cline{1-2}
-Less   than 1    & More   variance within samples than between samples  &  &  &  \\ \cline{1-2}
-1                & Variance   within samples = Variance between samples &  &  &  \\ \cline{1-2}
-Greater   than 1 & More   variance between samples than within samples  &  &  &  \\ \cline{1-2}
-\end{tabular}
-\end{table}
-$$
+| F value       | Meaning                                                 |
+|---------------|---------------------------------------------------------|
+| Less than 1   | More variance within samples than between samples       |
+| 1             | Variance within samples equals variance between samples |
+| Greater than 1| More variance between samples than within samples       |
+
 
 #### Conclusions
 1. The null hypothesis must be retained.
