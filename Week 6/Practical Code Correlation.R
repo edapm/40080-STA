@@ -71,6 +71,7 @@ plot(nh4no3$nh4,nh4no3$no3)
 # There appears to be a positive relationship between the variables. 
 
 # Examine some other relationships between the variables.
+plot(nh4no3$po3, nh4no3$carbon)
 
 ############################
 # Correlation coefficient  # 
