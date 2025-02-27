@@ -453,3 +453,123 @@ EXPECTED COUNTS of less than five.
 ```
 
 The formula is only an approximation (breaks down at low cell counts)
+
+## Statistics Lecture 06, 27/02/2025
+### Measures of Association: Correlation
+(A bridge between Lectures 1-5 and the following lectures on linear regression)
+
+- The degree of association between two variables
+
+- No implied directionality
+
+- **Correlation does NOT imply causation**
+
+#### Correlation Coefficient
+- A number between -1 and 1
+
+| Correlation Coefficient | Meaning |
+|-------------------------|---------|
+| +1                       | Perfect positive correlation |
+| 0                       | No correlation |
+| -1                      | Perfect negative correlation |
+
+Always plot a scatter graph before calculating correlation
+
+#### Pearson's product-moment correlation coefficient (*r*)
+##### Assumptions
+1. The two variables are interval or ratio data (not nominal or ordinal)
+2. The relationship between the two variables is linear
+3. Parametric test: the two variables are normally distributed
+4. Observations are independent of each other and in pairs
+
+If the assumptions are not met, use a non-parametric test ⬇️
+
+#### ASIDE: Spearman's Rank Correlation Coefficient (*r<sub>s</sub>*)
+##### Assumptions
+1. The two variables are ordinal, ratio or interval data
+2. The relationship between the two variables is monotonic (not necessarily linear)
+3. Non-parametric test: the two variables are not normally distributed
+4. Observations are independent of each other and in pairs
+
+But you __must__ always use Pearson where appropriate
+
+#### Pearson's (continued)
+##### Hypotheses
+- H₀: There is no correlation between the two variables
+- Hₐ: There is a correlation between the two variables (two-tailed) or
+- Hₐ: There is a positive correlation between the two variables (one-tailed)
+
+##### Equation
+$$
+r = \frac{\sum (x - \bar{x})(y - \bar{y})}{\sigma_x \sigma_y}
+$$
+
+##### Significance testing for *r*
+- Rare for *r* = ±1
+- Degrees of freedom is $(n-2)$ not $(n-1)$
+
+###### Example
+$$
+r = 0.8
+\newline
+n = 20
+\newline
+t = \frac{r}{\sqrt{\frac{1-r^2}{n-2}}}
+\newline
+t = \frac{0.8}{\sqrt{\frac{1-0.8^2}{20-2}}}
+\newline
+t = 5.66
+\newline
+\text{Critical value} = 2.086
+\newline
+\text{if $\alpha$ = 0.05, reject H₀}
+$$
+
+##### Writing up your results
+
+There is a negative (inverse) association (relationship) between variable A and variable B, which is not statistically significant at the 95% confidence level (0.05 level) (*r* = -0.021, *t* = -0.127, *p* = 0.899, *n* = 40).
+
+#### Correlation in R
+```{r}
+# create data frame
+age <- c(25, 30, 35, 40, 45, 50, 55, 60, 65, 70)
+blood_pressure <- c(122, 137, 140, 152, 165, 178, 181, 196, 202, 213)
+table3 <- data.frame(age, blood_pressure)
+
+# plot scatter graph
+plot(table3$age, table3$blood_pressure, xlab = "Age", ylab = "Blood Pressure", main = "Scatter plot of Age vs Blood Pressure")
+
+# calculate correlation
+res<-cor(table3$age, table3$blood_pressure, method = "pearson")
+res
+```
+
+#### Sample Size Matters!
+- The larger the sample size, the more likely you are to find a significant correlation
+
+- Even a weak correlation can be statistically significant with a large enough sample size
+
+#### Co-efficent of Determination (R<sup>2</sup>)
+$$
+R^2 = r \cdot r
+$$
+
+##### The meaning of the R<sup>2</sup> value
+R<sup>2</sup> varies between 0 and 1, but is commonly expressed as a percentage.
+
+E.g. 0.545 > 54.5%
+
+54.5% of the variation in $y$ is 'statistically explained' by variations in $x$.
+
+R<sup>2</sup> measure the Common Variance between the two variables.
+
+There is no common variance between the two variables if *r* and R<sup>2</sup> = 0
+
+#### Multicollinearity
+- When two or more independent variables are highly correlated with each other
+- Occurs when $y$ is calculated directly from $x$.
+  - These variables are "autocorrelated", and the correlation between them is false or spurious.
+
+##### Closed Number Sets
+- If you have a closed number set, you will always get a correlation of 1
+- E.g. $y + x = 100\%$
