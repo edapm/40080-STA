@@ -540,7 +540,7 @@ table3 <- data.frame(age, blood_pressure)
 plot(table3$age, table3$blood_pressure, xlab = "Age", ylab = "Blood Pressure", main = "Scatter plot of Age vs Blood Pressure")
 
 # calculate correlation
-res<-cor(table3$age, table3$blood_pressure, method = "pearson")
+res<-cor.test(table3$age, table3$blood_pressure, method = "pearson")
 res
 ```
 
