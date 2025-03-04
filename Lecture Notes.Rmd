@@ -1,17 +1,16 @@
 ---
 title: "40080 LC Statistics"
 author: "Ed Mason"
-output: html_document
+output: 
+  html_document:
+    toc: true
 ---
-
 ```{r setup, include=FALSE}
 library(lattice)
 library(ggplot2)
 library(pastecs)
 library(car)
 ```
-
-Last updated: `r Sys.Date()`
 
 # Statistics Lecture 02, 30/01/2025
 
@@ -454,8 +453,8 @@ EXPECTED COUNTS of less than five.
 
 The formula is only an approximation (breaks down at low cell counts)
 
-## Statistics Lecture 06, 27/02/2025
-### Measures of Association: Correlation
+# Statistics Lecture 06, 27/02/2025
+## Measures of Association: Correlation
 (A bridge between Lectures 1-5 and the following lectures on linear regression)
 
 - The degree of association between two variables
@@ -464,7 +463,7 @@ The formula is only an approximation (breaks down at low cell counts)
 
 - **Correlation does NOT imply causation**
 
-#### Correlation Coefficient
+### Correlation Coefficient
 - A number between -1 and 1
 
 | Correlation Coefficient | Meaning |
@@ -475,8 +474,8 @@ The formula is only an approximation (breaks down at low cell counts)
 
 Always plot a scatter graph before calculating correlation
 
-#### Pearson's product-moment correlation coefficient (*r*)
-##### Assumptions
+### Pearson's product-moment correlation coefficient (*r*)
+#### Assumptions
 1. The two variables are interval or ratio data (not nominal or ordinal)
 2. The relationship between the two variables is linear
 3. Parametric test: the two variables are normally distributed
@@ -484,8 +483,8 @@ Always plot a scatter graph before calculating correlation
 
 If the assumptions are not met, use a non-parametric test ⬇️
 
-#### ASIDE: Spearman's Rank Correlation Coefficient (*r<sub>s</sub>*)
-##### Assumptions
+### ASIDE: Spearman's Rank Correlation Coefficient (*r<sub>s</sub>*)
+#### Assumptions
 1. The two variables are ordinal, ratio or interval data
 2. The relationship between the two variables is monotonic (not necessarily linear)
 3. Non-parametric test: the two variables are not normally distributed
@@ -493,22 +492,22 @@ If the assumptions are not met, use a non-parametric test ⬇️
 
 But you __must__ always use Pearson where appropriate
 
-#### Pearson's (continued)
-##### Hypotheses
+### Pearson's (continued)
+#### Hypotheses
 - H₀: There is no correlation between the two variables
 - Hₐ: There is a correlation between the two variables (two-tailed) or
 - Hₐ: There is a positive correlation between the two variables (one-tailed)
 
-##### Equation
+#### Equation
 $$
 r = \frac{\sum (x - \bar{x})(y - \bar{y})}{\sigma_x \sigma_y}
 $$
 
-##### Significance testing for *r*
+#### Significance testing for *r*
 - Rare for *r* = ±1
 - Degrees of freedom is $(n-2)$ not $(n-1)$
 
-###### Example
+##### Example
 $$
 r = 0.8
 \newline
@@ -525,11 +524,11 @@ t = 5.66
 \text{if $\alpha$ = 0.05, reject H₀}
 $$
 
-##### Writing up your results
+#### Writing up your results
 
 There is a negative (inverse) association (relationship) between variable A and variable B, which is not statistically significant at the 95% confidence level (0.05 level) (*r* = -0.021, *t* = -0.127, *p* = 0.899, *n* = 40).
 
-#### Correlation in R
+### Correlation in R
 ```{r}
 # create data frame
 age <- c(25, 30, 35, 40, 45, 50, 55, 60, 65, 70)
@@ -544,17 +543,17 @@ res<-cor.test(table3$age, table3$blood_pressure, method = "pearson")
 res
 ```
 
-#### Sample Size Matters!
+### Sample Size Matters!
 - The larger the sample size, the more likely you are to find a significant correlation
 
 - Even a weak correlation can be statistically significant with a large enough sample size
 
-#### Co-efficent of Determination (R<sup>2</sup>)
+### Co-efficent of Determination (R<sup>2</sup>)
 $$
 R^2 = r \cdot r
 $$
 
-##### The meaning of the R<sup>2</sup> value
+#### The meaning of the R<sup>2</sup> value
 R<sup>2</sup> varies between 0 and 1, but is commonly expressed as a percentage.
 
 E.g. 0.545 > 54.5%
@@ -565,11 +564,14 @@ R<sup>2</sup> measure the Common Variance between the two variables.
 
 There is no common variance between the two variables if *r* and R<sup>2</sup> = 0
 
-#### Multicollinearity
+### Multicollinearity
 - When two or more independent variables are highly correlated with each other
 - Occurs when $y$ is calculated directly from $x$.
   - These variables are "autocorrelated", and the correlation between them is false or spurious.
 
-##### Closed Number Sets
+#### Closed Number Sets
 - If you have a closed number set, you will always get a correlation of 1
 - E.g. $y + x = 100\%$
+
+---
+Last updated: `r Sys.Date()`
