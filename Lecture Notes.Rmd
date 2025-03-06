@@ -4,7 +4,11 @@ author: "Ed Mason"
 output: 
   html_document:
     toc: true
+editor_options: 
+  markdown: 
+    wrap: 72
 ---
+
 ```{r setup, include=FALSE}
 library(lattice)
 library(ggplot2)
@@ -55,7 +59,8 @@ upland_limestone_sample <- c(25,30,30,40,40,50,50,60,60,65)
 percentage_meadow <- data.frame(lowland_clay_sample, upland_limestone_sample)
 ```
 
-Statistical hypothesis testing gives an objective method to see if something is due to chance or is genuinely statistically significant
+Statistical hypothesis testing gives an objective method to see if
+something is due to chance or is genuinely statistically significant
 
 ### Six Stages
 
@@ -68,20 +73,20 @@ Statistical hypothesis testing gives an objective method to see if something is 
 
 #### 1. State null hypothesis
 
-There is no significant difference between meadow percentage in lowland and upland areas. Hₒ: μ(lowland) = μ(upland)
+There is no significant difference between meadow percentage in lowland
+and upland areas. Hₒ: μ(lowland) = μ(upland)
 
 #### 2. State alternative hypothesis
 
-There **is** a significant difference between meadow percentage in lowland and upland areas. Hₐ: μ(lowland) != μ(upland)
+There **is** a significant difference between meadow percentage in
+lowland and upland areas. Hₐ: μ(lowland) != μ(upland)
 
 ##### Non-directional or Directional Tests
 
-|               | Non-directional                                      | Directional                                            |
-|--------------|--------------------------------------------------|---------------------------------------------------|
-|              | **Do NOT** state which variable is greatest in Hₐ | State which variable is greatest in Hₐ:  μ(lowland) > μ(upland) OR μ(lowland) < μ(upland)     |
-|              | Two-tailed test                                  | One-tailed test                                   |
-
-
+|   | Non-directional | Directional |
+|----------------|----------------------------|-----------------------------|
+|  | **Do NOT** state which variable is greatest in Hₐ | State which variable is greatest in Hₐ: μ(lowland) \> μ(upland) OR μ(lowland) \< μ(upland) |
+|  | Two-tailed test | One-tailed test |
 
 #### 3. Decide upon a rejection level
 
@@ -89,11 +94,13 @@ Probability of Hₒ being true = 0.024
 
 Probability of Hₐ being true = 0.976
 
-The purpose of this test is to find out which hypothesis **is most likely** to be correct. (Conclusions are probabilistic not absolute).
+The purpose of this test is to find out which hypothesis **is most
+likely** to be correct. (Conclusions are probabilistic not absolute).
 
 ##### Statistical significance levels
 
--   Usually scientists use α = 0.05 - the 95% statistical significance level (confidence level).
+-   Usually scientists use α = 0.05 - the 95% statistical significance
+    level (confidence level).
 -   Leaves room for 5% error in our conclusion.
 -   Second most commonly used is α = 0.01 - the 99% confidence level.
 
@@ -103,7 +110,8 @@ Type I Error - Should have retained Hₒ
 
 Type II Error - Should have rejected Hₒ
 
-95% level is the best level for the trade-off between Type I and Type II errors
+95% level is the best level for the trade-off between Type I and Type II
+errors
 
 (90% more likely Type I; 99.9% more likely Type II)
 
@@ -123,7 +131,8 @@ Before you do the test, have you satisfied the assumptions?
 
 2.  Interval/ratio data, cannot use data in categories
 
-3.  Each observation is independent of the other observations in the same sample
+3.  Each observation is independent of the other observations in the
+    same sample
 
 4.  The samples are taken from populations which have similar variances
 
@@ -169,13 +178,16 @@ For the example:
 
 One- or two-sample test (comparison to popln. mean or one another)
 
-Independent samples or Paired samples (samples are independent of each other or are paired - measured at the same time)
+Independent samples or Paired samples (samples are independent of each
+other or are paired - measured at the same time)
 
 $$
 t = \frac{\text{difference between the means}}{\text{standard error of the difference}}
-$$ Lowland Clay: Arithmetic Mean = 35% Standard Deviation = 15.81% Number of Observations = 10
+$$ Lowland Clay: Arithmetic Mean = 35% Standard Deviation = 15.81%
+Number of Observations = 10
 
-Upland Limestone: Arithmetic Mean = 45% Standard Deviation = 14.14% Number of Observations = 10
+Upland Limestone: Arithmetic Mean = 45% Standard Deviation = 14.14%
+Number of Observations = 10
 
 # Statistics Lecture 04, 13/02/2025
 
@@ -199,7 +211,8 @@ ii. Paired samples (Repeated Measures ANOVA)
 
 ### One-way ANOVA: Independent Samples
 
--   Each observation is classified into one sample or another based on ONE criterion.
+-   Each observation is classified into one sample or another based on
+    ONE criterion.
 
 E.g. crop yield per acre obtained on different soil types
 
@@ -224,7 +237,9 @@ $$
 
 #### Assumptions of ANOVA
 
-1.  The errors (residuals) are normally distributed. This is more likely to be achieved when random samples from normal populations are used. For each sample:
+1.  The errors (residuals) are normally distributed. This is more likely
+    to be achieved when random samples from normal populations are used.
+    For each sample:
 
 -   Plot a histogram
 -   Calculate the skewness value
@@ -236,7 +251,8 @@ $$
 -   Variance ratio
 -   Levene's Test
 
-NB. If you cannot satisfy these assumptions, you need to do another test (see end of lecture).
+NB. If you cannot satisfy these assumptions, you need to do another test
+(see end of lecture).
 
 #### Reminder: What is Variance?
 
@@ -246,7 +262,8 @@ $$
 
 ##### Calculating the Total Sum of Squares
 
-The Total Sum of Squares (TSS) is the sum of the squared differences between each observation and the overall mean.
+The Total Sum of Squares (TSS) is the sum of the squared differences
+between each observation and the overall mean.
 
 ##### Calculating the Sum of Squares Between the Columns (SSC)
 
@@ -285,6 +302,7 @@ $$
 ```
 
 #### ANOVA Table
+
 Need to use Degrees of Freedom to calculate the Mean Sum of Squares
 
 Then we can run Snedecor’s Variance Ratio Test (*F*)
@@ -293,21 +311,24 @@ $$
 F = \frac{\text{Mean Sum of Squares between samples}}{\text{Mean Sum of Squares within samples}} = \frac{\text{Systematic Differences}}{\text{Random Variations}}
 $$
 
-| F value       | Meaning                                                 |
-|---------------|---------------------------------------------------------|
-| Less than 1   | More variance within samples than between samples       |
-| 1             | Variance within samples equals variance between samples |
-| Greater than 1| More variance between samples than within samples       |
-
+| F value        | Meaning                                                 |
+|----------------|---------------------------------------------------------|
+| Less than 1    | More variance within samples than between samples       |
+| 1              | Variance within samples equals variance between samples |
+| Greater than 1 | More variance between samples than within samples       |
 
 #### Conclusions
-1. The null hypothesis must be retained.
-2. There is no significant difference in crop yields between the three soil types.
-3. The differences observed between the samples are a product of random chance and do not reflect a real difference in crop yield with soil type.
+
+1.  The null hypothesis must be retained.
+2.  There is no significant difference in crop yields between the three
+    soil types.
+3.  The differences observed between the samples are a product of random
+    chance and do not reflect a real difference in crop yield with soil
+    type.
 
 ### Arranging In R
-Values in one column, factor in another
-(see table1)
+
+Values in one column, factor in another (see table1)
 
 ```{r}
 print(table1)
@@ -315,51 +336,73 @@ res<-aov(crop_yield~soil_type, data = table1)
 summary(res)
 boxplot(crop_yield~soil_type, data = table1)
 ```
+
 ### What if Assumptions are not met?
-1. Transform all of the samples (e.g. log base 10) and then test assumptions again
-2. Use a non-parametric test (e.g. Kruskal-Wallis Test)
+
+1.  Transform all of the samples (e.g. log base 10) and then test
+    assumptions again
+2.  Use a non-parametric test (e.g. Kruskal-Wallis Test)
 
 ### Kruskal-Wallis Test
+
 Only use if you CANNOT use a parametric test
+
 ```{r}
 kruskal.test(crop_yield~soil_type, data = table1)
 ```
+
 The bigger the value, the bigger the difference between the samples
 
 ### Post-hoc Tests
-If you have more than two samples, you need to do a post-hoc test to see which samples are different from each other
+
+If you have more than two samples, you need to do a post-hoc test to see
+which samples are different from each other
 
 #### Tukey Test
+
 ```{r}
 TukeyHSD(res)
 ```
 
 # Statistics Lecture 05, 20/02/2025
+
 ## The Chi-Square Test
-What if your data is categorized? -> the Chi(pronounced "Kai")-Square test
+
+What if your data is categorized? -\> the Chi(pronounced "Kai")-Square
+test
 
 ### Purpose
-- Assessing the similarity of two or more frequency distributions
+
+-   Assessing the similarity of two or more frequency distributions
 
 #### Example - Expansion plans for Luton Airport
-- Random sample of 100 people living in the vicinity of the airport
-- Questionnaires usually begin with background questions, e.g. age,  sex, and socio-economic status (ask occupation as opposed to salary)
-- Scale from 1 to 5 (1 = strongly agree, 5 = strongly disagree) -> Likert scale
+
+-   Random sample of 100 people living in the vicinity of the airport
+-   Questionnaires usually begin with background questions, e.g. age,
+    sex, and socio-economic status (ask occupation as opposed to salary)
+-   Scale from 1 to 5 (1 = strongly agree, 5 = strongly disagree) -\>
+    Likert scale
 
 <br>
 
-- Chi-Square is all about cross-tabulation (Comparing two or more categorical variables)
+-   Chi-Square is all about cross-tabulation (Comparing two or more
+    categorical variables)
 
 (E.g. Attitudes to Airport expansion cross-tabulated by age group)
 
 ### Assumptions
-1. A non-parametric test (no assumptions about distribution shape)
-2. The data must be in the form of frequencies (never on continuous numerical data)
-3. The samples are mutually independent (only answers one option).
-4. No more than 20% of the categories should have expected frequencies of less than five (mainly to ensure sample size is large enough - will come back to later on).
-5. Random and representative sampling
+
+1.  A non-parametric test (no assumptions about distribution shape)
+2.  The data must be in the form of frequencies (never on continuous
+    numerical data)
+3.  The samples are mutually independent (only answers one option).
+4.  No more than 20% of the categories should have expected frequencies
+    of less than five (mainly to ensure sample size is large enough -
+    will come back to later on).
+5.  Random and representative sampling
 
 ### Worked Example
+
 ```{r}
 # create data frame
 categories <- c("1 person", "2 people", "3 people", "4 or more")
@@ -369,16 +412,22 @@ table2 <- data.frame(categories, exeter, exmouth)
 ```
 
 #### Stage 1: Write down hypotheses
+
 ##### Null Hypothesis
+
 The frequency distributions are identical.
 
 ##### Alternative Hypothesis
+
 The frequency distributions are different.
 
 #### Stage 2: Calculate expected counts
-The expected counts assumed that the two frequeny distributions are identical (H₀ is true).
+
+The expected counts assumed that the two frequeny distributions are
+identical (H₀ is true).
 
 E.g. 1 person households
+
 ```{r}
 sum_oneperson <- sum(table2$exeter[1], table2$exmouth[1])
 exeter_size <- sum(table2$exeter)
@@ -392,61 +441,72 @@ expected_oneperson_exmouth <- (expected_oneperson / 100) * exmouth_size
 Expected vs observed count
 
 #### Stage 3: Calculate the Chi-Square Statistic
+
 $$
 \chi^2 = \frac{(O - E)^2}{E}
 $$
 
 #### Stage 4: Intepreting the Chi-Square Statistic
-Chi-Square < 0 -> You have made a pig’s ear of your arithmetic.
 
-Chi-Square = 0 -> The two frequency distributions are identical
-and/or there is no association between the two variables.
+Chi-Square \< 0 -\> You have made a pig’s ear of your arithmetic.
 
-As Chi-Square becomes larger and more positive -> The two frequency distributions are becoming more dissimilar (different) and/or there is a strong association between the two variables.
+Chi-Square = 0 -\> The two frequency distributions are identical and/or
+there is no association between the two variables.
+
+As Chi-Square becomes larger and more positive -\> The two frequency
+distributions are becoming more dissimilar (different) and/or there is a
+strong association between the two variables.
 
 #### Stage 5: Compare the Chi-Square Statistic to the Critical Value
+
 $$
 \chi^2 = 5.657
 $$
 
-1. Size of table: larger tables have higher critical values
-$$
-\text{Degrees of freedom} = (\text{rows} - 1) * (\text{columns} - 1)
-\newline
-\text{df} = (4 - 1) * (2 - 1) = 3
-\newline
-\text{df} = 3
-$$
+1.  Size of table: larger tables have higher critical values $$
+    \text{Degrees of freedom} = (\text{rows} - 1) * (\text{columns} - 1)
+    \newline
+    \text{df} = (4 - 1) * (2 - 1) = 3
+    \newline
+    \text{df} = 3
+    $$
 
-2. Rejection level
-To reject at 5% level, the critical value is 7.815
+2.  Rejection level To reject at 5% level, the critical value is 7.815
 
 So here, we would retain the null hypothesis
 
 #### Stage 6: Draw a conclusion
+
 Here we have retained the null hypothesis.
 
-Therefore, there is no difference between the distributions of household sizes in the two towns.
+Therefore, there is no difference between the distributions of household
+sizes in the two towns.
 
 The distributions are similar.
 
-The differences between the two towns are small and could have been generated by chance alone.
+The differences between the two towns are small and could have been
+generated by chance alone.
 
 Note: Remember to mention at what level if you are rejecting H₀
 
 #### Representing the data
-- Clustered bar chart
+
+-   Clustered bar chart
+
 ```{r}
 ### produce clustered bar chart with table2
 barplot(as.matrix(table2[,2:3]), beside = TRUE, col = c("blue", "red"), legend = rownames(table2))
 ```
 
 ### What if the 20% rule is violated?
-- The test is only valid when no more than 20% of the cells have
-EXPECTED COUNTS of less than five.
-- If this rule is violated, you could aggregate data or combine categories together
+
+-   The test is only valid when no more than 20% of the cells have
+    EXPECTED COUNTS of less than five.
+-   If this rule is violated, you could aggregate data or combine
+    categories together
 
 ### Chi-Square Test with R
+
 ```{r}
 # cant get it to work
 ```
@@ -454,60 +514,76 @@ EXPECTED COUNTS of less than five.
 The formula is only an approximation (breaks down at low cell counts)
 
 # Statistics Lecture 06, 27/02/2025
+
 ## Measures of Association: Correlation
-(A bridge between Lectures 1-5 and the following lectures on linear regression)
 
-- The degree of association between two variables
+(A bridge between Lectures 1-5 and the following lectures on linear
+regression)
 
-- No implied directionality
+-   The degree of association between two variables
 
-- **Correlation does NOT imply causation**
+-   No implied directionality
+
+-   **Correlation does NOT imply causation**
 
 ### Correlation Coefficient
-- A number between -1 and 1
 
-| Correlation Coefficient | Meaning |
-|-------------------------|---------|
-| +1                       | Perfect positive correlation |
-| 0                       | No correlation |
+-   A number between -1 and 1
+
+| Correlation Coefficient | Meaning                      |
+|-------------------------|------------------------------|
+| +1                      | Perfect positive correlation |
+| 0                       | No correlation               |
 | -1                      | Perfect negative correlation |
 
 Always plot a scatter graph before calculating correlation
 
 ### Pearson's product-moment correlation coefficient (*r*)
+
 #### Assumptions
-1. The two variables are interval or ratio data (not nominal or ordinal)
-2. The relationship between the two variables is linear
-3. Parametric test: the two variables are normally distributed
-4. Observations are independent of each other and in pairs
+
+1.  The two variables are interval or ratio data (not nominal or
+    ordinal)
+2.  The relationship between the two variables is linear
+3.  Parametric test: the two variables are normally distributed
+4.  Observations are independent of each other and in pairs
 
 If the assumptions are not met, use a non-parametric test ⬇️
 
-### ASIDE: Spearman's Rank Correlation Coefficient (*r<sub>s</sub>*)
-#### Assumptions
-1. The two variables are ordinal, ratio or interval data
-2. The relationship between the two variables is monotonic (not necessarily linear)
-3. Non-parametric test: the two variables are not normally distributed
-4. Observations are independent of each other and in pairs
+### ASIDE: Spearman's Rank Correlation Coefficient (*r*<sub>s</sub>)
 
-But you __must__ always use Pearson where appropriate
+#### Assumptions
+
+1.  The two variables are ordinal, ratio or interval data
+2.  The relationship between the two variables is monotonic (not
+    necessarily linear)
+3.  Non-parametric test: the two variables are not normally distributed
+4.  Observations are independent of each other and in pairs
+
+But you **must** always use Pearson where appropriate
 
 ### Pearson's (continued)
+
 #### Hypotheses
-- H₀: There is no correlation between the two variables
-- Hₐ: There is a correlation between the two variables (two-tailed) or
-- Hₐ: There is a positive correlation between the two variables (one-tailed)
+
+-   H₀: There is no correlation between the two variables
+-   Hₐ: There is a correlation between the two variables (two-tailed) or
+-   Hₐ: There is a positive correlation between the two variables
+    (one-tailed)
 
 #### Equation
+
 $$
 r = \frac{\sum (x - \bar{x})(y - \bar{y})}{\sigma_x \sigma_y}
 $$
 
 #### Significance testing for *r*
-- Rare for *r* = ±1
-- Degrees of freedom is $(n-2)$ not $(n-1)$
+
+-   Rare for *r* = ±1
+-   Degrees of freedom is $(n-2)$ not $(n-1)$
 
 ##### Example
+
 $$
 r = 0.8
 \newline
@@ -526,9 +602,13 @@ $$
 
 #### Writing up your results
 
-There is a negative (inverse) association (relationship) between variable A and variable B, which is not statistically significant at the 95% confidence level (0.05 level) (*r* = -0.021, *t* = -0.127, *p* = 0.899, *n* = 40).
+There is a negative (inverse) association (relationship) between
+variable A and variable B, which is not statistically significant at the
+95% confidence level (0.05 level) (*r* = -0.021, *t* = -0.127, *p* =
+0.899, *n* = 40).
 
 ### Correlation in R
+
 ```{r}
 # create data frame
 age <- c(25, 30, 35, 40, 45, 50, 55, 60, 65, 70)
@@ -544,34 +624,194 @@ res
 ```
 
 ### Sample Size Matters!
-- The larger the sample size, the more likely you are to find a significant correlation
 
-- Even a weak correlation can be statistically significant with a large enough sample size
+-   The larger the sample size, the more likely you are to find a
+    significant correlation
+
+-   Even a weak correlation can be statistically significant with a
+    large enough sample size
 
 ### Co-efficent of Determination (R<sup>2</sup>)
+
 $$
 R^2 = r \cdot r
 $$
 
 #### The meaning of the R<sup>2</sup> value
-R<sup>2</sup> varies between 0 and 1, but is commonly expressed as a percentage.
 
-E.g. 0.545 > 54.5%
+R<sup>2</sup> varies between 0 and 1, but is commonly expressed as a
+percentage.
 
-54.5% of the variation in $y$ is 'statistically explained' by variations in $x$.
+E.g. 0.545 \> 54.5%
+
+54.5% of the variation in $y$ is 'statistically explained' by variations
+in $x$.
 
 R<sup>2</sup> measure the Common Variance between the two variables.
 
-There is no common variance between the two variables if *r* and R<sup>2</sup> = 0
+There is no common variance between the two variables if *r* and
+R<sup>2</sup> = 0
 
 ### Multicollinearity
-- When two or more independent variables are highly correlated with each other
-- Occurs when $y$ is calculated directly from $x$.
-  - These variables are "autocorrelated", and the correlation between them is false or spurious.
+
+-   When two or more independent variables are highly correlated with
+    each other
+-   Occurs when $y$ is calculated directly from $x$.
+    -   These variables are "autocorrelated", and the correlation
+        between them is false or spurious.
 
 #### Closed Number Sets
-- If you have a closed number set, you will always get a correlation of 1
-- E.g. $y + x = 100\%$
 
----
+-   If you have a closed number set, you will always get a correlation
+    of 1
+-   E.g. $y + x = 100\%$
+
+# Statistics Lecture 07, 06/03/2025
+
+## Linear Regression
+
+E.g. Question: Does a relationship exist between average annual rainfall
+and altitude?
+
+### Three Solutions
+
+#### 1. Scatter Graph
+
+-   Plot the data
+-   Look for a pattern
+
+#### 2. Correlation Coefficient
+
+-   Calculate the correlation coefficient
+-   Look for a relationship
+-   Unexplained variance
+
+#### 3. Regression Analysis
+
+-   Regression analysis produces an equation that uses one (or more)
+    variable(s) to help explain the observed variation in another
+    variable.
+-   Unlike a correlation co-efficient, there is **DIRECTION of
+    causation**, i.e. $y = f(x)$
+-   NB. Don't throw away marks by getting this the wrong way around!
+-   Line of best fit -\> 'regression line'
+
+### Example
+
+Does a relationship exist between house prices and distance from the
+City Centre?
+
+$\text{House Price} = f(\text{Distance})$
+
+$y = f(x)$
+
+-   Scatter plot
+-   Correlation Coefficient -\> if $R² = 0.8$, 80% of the variation in
+    house prices is explained by distance from the City Centre
+-   Regression analysis -\> line of best fit
+
+Regression is important for prediction of values
+
+E.g. Where should I built a new supermarket to gain the highest revenue?
+
+### Reminder: $y=mx+c$
+
+NB. statistics equation is $y = a + bx$
+
+$y$ -\> dependent variable (response variable)
+
+$a$ -\> y-intercept ($c$)
+
+$b$ -\> gradient of the line ($m$) $= \frac{\Delta y}{\Delta x}$
+
+$x$ -\> independent variable (predictor variable)
+
+($a + b$ -\> regression coefficients)
+
+### Two types of regression
+
+Simple -\> one predictor variable
+
+Multiple -\> two or more predictor variables
+
+(Coursework tip: 3 or 4 predictors in your final model)
+
+Observations in rows; variables in columns
+
+### Assumptions (Simple)
+
+#### 1. Normality of errors (residuals)
+
+-   The assumption of normally distributed errors is more likely to be
+    satisfied when the variables are normally distributed in the first
+    place.
+-   Plot a histogram (e.g. altitude is positively skewed, rainfall is
+    more normally distributed)
+-   Calculate the skewness value / Z score of skewness
+-   Perform the K-S test or Shapiro-Wilk test
+
+#### 2. Linearity
+
+-   The relationship between the two variables is linear
+
+#### 3. Outliers
+
+-   Outliers can have a large effect on the regression line (very high
+    or very low value)
+-   Z-scores are commonly used to identify outliers ($Z = \frac{X - \bar{X}}{\sigma}$)
+
+### Assumptions (Mutliple)
+#### 1. Normality of errors (residuals)
+#### 2. Linearity
+#### 3. Outliers
+#### 4. Independence of predictors (no multicollinearity)
+The 'independent' (predictor) variables should be precisely that - independent of one another.
+
+The predictor variables should NOT be significantly correlated, or show high multicollinearity.
+
+E.g. Supermarket store size and parking spaces are significantly correlated; the second variable is said to be redundant.
+
+Ideally, predictor variables are perfectly uncorrelated. But some tolerance allowed.
+
+### Making predictions from regression equations
+#### E.g. Predicting rainfall from altitude
+$$
+y = a + bx
+\newline
+\text{Rainfall} = 18.14 + (0.015 * \text{Altitude})
+\newline
+\text{Altitude} = 2000 \text{ft}
+\newline
+\text{Rainfall} = 18.14 + (0.015 * 2000) = 18.14 + 30 = 48.14 \text{in}
+$$
+
+### Defining the line of best fit
+- We need an objective (mathematical) method of determining the line of best fit.
+- The most commonly used technique is called the LEAST SQUARES METHOD.
+
+#### Bi-variate mean centre
+- The mean of the x and y values are subtracted from each value.
+
+The line is placed in the position that minimises $(Y_o – Y_p)^2$
+
+($Y_o$ = observed value, $Y_p$ = predicted value)
+
+### How good a fit is a regression model?
+(Next lecture -> how to do this mathematically)
+
+- The regression line has a steep gradient
+- The points are close to the regression line
+- High R² value (close to 1)
+- $y$ is responsive to variations in $x$
+- Good predictor variable
+
+Or, a bad model:
+
+- The regression line is nearly horizontal
+- The points are far from the regression line
+- Low R² value (close to 0)
+- $y$ is not responsive to variations in $x$
+- Poor predictor variable
+
+------------------------------------------------------------------------
 Last updated: `r Sys.Date()`
