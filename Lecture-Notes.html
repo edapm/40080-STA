@@ -459,6 +459,20 @@ fit</a></li>
 regression model?</a></li>
 </ul></li>
 </ul></li>
+<li><a href="#statistics-lecture-08-07032025" id="toc-statistics-lecture-08-07032025">Statistics Lecture 08,
+07/03/2025</a>
+<ul>
+<li><a href="#linear-regression-continued" id="toc-linear-regression-continued">Linear Regression (continued)</a>
+<ul>
+<li><a href="#assessing-goodness-of-fit-mathematically" id="toc-assessing-goodness-of-fit-mathematically">Assessing goodness of
+fit (mathematically!)</a></li>
+<li><a href="#the-common-theory" id="toc-the-common-theory">The Common
+Theory</a></li>
+<li><a href="#the-goodness-of-fit" id="toc-the-goodness-of-fit">The
+goodness of fit</a></li>
+<li><a href="#significance-testing" id="toc-significance-testing">Significance testing</a></li>
+</ul></li>
+</ul></li>
 </ul>
 </div>
 
@@ -1395,7 +1409,7 @@ METHOD.</li>
 </div>
 <div id="how-good-a-fit-is-a-regression-model" class="section level3">
 <h3>How good a fit is a regression model?</h3>
-<p>(Next week -&gt; how to do this mathematically)</p>
+<p>(Next lecture -&gt; how to do this mathematically)</p>
 <ul>
 <li>The regression line has a steep gradient</li>
 <li>The points are close to the regression line</li>
@@ -1413,8 +1427,119 @@ in <span class="math inline">\(x\)</span></li>
 variations in <span class="math inline">\(x\)</span></li>
 <li>Poor predictor variable</li>
 </ul>
+</div>
+</div>
+</div>
+<div id="statistics-lecture-08-07032025" class="section level1">
+<h1>Statistics Lecture 08, 07/03/2025</h1>
+<div id="linear-regression-continued" class="section level2">
+<h2>Linear Regression (continued)</h2>
+<div id="assessing-goodness-of-fit-mathematically" class="section level3">
+<h3>Assessing goodness of fit (mathematically!)</h3>
+<p>We want to get R² as close to 1 as possible (if R² = 1, that is a
+perfect model)</p>
+</div>
+<div id="the-common-theory" class="section level3">
+<h3>The Common Theory</h3>
+<ul>
+<li>The <em>t</em> test, Analysis of Variance (ANOVA) and the F test are
+all used to test the significance of the regression model.</li>
+</ul>
+<p><span class="math inline">\(\text{TSS} = \text{SSC} +
+\text{SSE}\)</span></p>
+<div id="the-total-sum-of-squares-tss" class="section level4">
+<h4>The Total Sum of Squares (TSS)</h4>
+<p>In regression, the equivalent of TSS is the variability in the
+dependent (<span class="math inline">\(y\)</span>) variable.</p>
+<p>If TSS = 0, then all the values of <span class="math inline">\(y\)</span> are the same.</p>
+<p>The higher the TSS value, the more variability in <span class="math inline">\(y\)</span>.</p>
+<p><span class="math inline">\(\text{TSS} = \sum (y -
+\bar{y})^2\)</span></p>
+</div>
+<div id="the-sum-of-squares-between-the-samples-ssc" class="section level4">
+<h4>The Sum of Squares Between the Samples (SSC)</h4>
+<p>In regression, the equivalent of SSC is the variability in the <span class="math inline">\(y\)</span> variable that is explained by the
+regression line.</p>
+<p>If RSS = 0, there is no trend in the data.</p>
+<p>The higher the SSC value, the stronger the trend in the data.</p>
+<p><span class="math inline">\(\text{SSC} = \sum (y_p -
+\bar{y})^2\)</span></p>
+<p>(The closer the regression line is to the mean, the smaller the SSC
+value)</p>
+</div>
+<div id="the-sum-of-squares-with-the-samples-sse" class="section level4">
+<h4>The Sum of Squares with the Samples (SSE)</h4>
+<p>NB. Residual -&gt; the difference between the observed value and the
+predicted value (error)</p>
+<p>In regression, the equivalent of SSE is the variation in the <span class="math inline">\(y\)</span> variable that is unexplained by the
+regression line.</p>
+<p>High SSE means the model is poor at predicting <span class="math inline">\(y\)</span></p>
+<p>Low SSE means the model is good at predicting <span class="math inline">\(y\)</span> -&gt; this is what we want!</p>
+</div>
+</div>
+<div id="the-goodness-of-fit" class="section level3">
+<h3>The goodness of fit</h3>
+<p><span class="math display">\[
+R^2 = \frac{\text{Regression sum of squares}}{\text{Total sum of
+squares}}
+\newline
+R^2 = \frac{\text{RSS}}{\text{TSS}}
+\newline
+R^2 = \frac{\text{Variation in } y \text{ that is explained by the
+regression line}}{\text{Total variation in the } y \text{ variable}}
+\]</span></p>
+</div>
+<div id="significance-testing" class="section level3">
+<h3>Significance testing</h3>
+<div id="the-regression-model-as-a-whole" class="section level4">
+<h4>1. The regression model as a whole</h4>
+<p>ANOVA is used to test the statistical significance of R².</p>
+<p>Use ANOVA to find RSS and TSS.</p>
+<p><span class="math inline">\(R² = \frac{RSS}{TSS}\)</span></p>
+<p>(N.B. R² is called Multiple R-squared in R output)</p>
+<p>The regression and residual (error) sum of squares are affected by
+the number of variables and observations respectively.</p>
+<p>So we need to remove these effects by calculating the variance
+terms.</p>
+<p><span class="math display">\[
+\text{Variance term} = \frac{\text{Sum of Squares}}{\text{Degrees of
+Freedom}}
+\]</span></p>
+<div id="degrees-of-freedom-for-rss-and-tss" class="section level5">
+<h5>Degrees of Freedom for RSS and TSS</h5>
+<p><span class="math display">\[
+\text{df (RSS)} = \text{Number of variables } (x + y) - 1
+\newline
+\newline
+\text{df (TSS)} = \text{Number of observations } - \text{Number of
+variables } (x + y)
+\]</span> ##### Snedecor’s Variance Ratio (<em>F</em>) <span class="math display">\[
+F = \frac{\text{Variance term for Regression sum of
+squares}}{\text{Variance term for Error sum of squares}}
+\]</span> E.g. p-value = 0.03374, so only reject H₀ at 0.05 level</p>
+<p><strong>The larger the F ratio the better the model</strong></p>
+</div>
+</div>
+<div id="the-regression-coefficents-a-b" class="section level4">
+<h4>2. The regression coefficents (<span class="math inline">\(a +
+b\)</span>)</h4>
+<p>Are the two regression co-efficients (a + b) statistically
+significant?</p>
+<p>The <em>t</em> test is used to test the significance of the
+regression coefficients.</p>
+<p><span class="math display">\[
+t = \frac{\text{Value of coefficent}}{\text{Standard Error}}
+\]</span> Standard error (SE): how far is co-efficient from true
+value?</p>
+<p>We want <em>t</em> to be as high (positive or negative) as
+possible</p>
+<div id="n.b.-r-significance-codes" class="section level5">
+<h5>N.B. R Significance Codes</h5>
+<p><code>0 (99.99) ‘***’ 0.001 (99.9) ‘**’ 0.01 (99) ‘*’ 0.05 (95) ‘.’ 0.1 (90) ‘ ’ 1 (0)</code></p>
 <hr />
-<p>Last updated: 2025-03-06</p>
+<p>Last updated: 2025-03-07</p>
+</div>
+</div>
 </div>
 </div>
 </div>

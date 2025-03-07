@@ -813,5 +813,105 @@ Or, a bad model:
 - $y$ is not responsive to variations in $x$
 - Poor predictor variable
 
+# Statistics Lecture 08, 07/03/2025
+## Linear Regression (continued)
+### Assessing goodness of fit (mathematically!)
+We want to get R² as close to 1 as possible (if R² = 1, that is a perfect model)
+
+### The Common Theory
+- The _t_ test, Analysis of Variance (ANOVA) and the F test are all used to test the significance of the regression model.
+
+$\text{TSS} = \text{SSC} + \text{SSE}$
+
+#### The Total Sum of Squares (TSS)
+In regression, the equivalent of TSS is the variability in the
+dependent ($y$) variable.
+
+If TSS = 0, then all the values of $y$ are the same.
+
+The higher the TSS value, the more variability in $y$.
+
+$\text{TSS} = \sum (y - \bar{y})^2$
+
+#### The Sum of Squares Between the Samples (SSC)
+In regression, the equivalent of SSC is the variability in the $y$ variable that is explained by the regression line.
+
+If RSS = 0, there is no trend in the data.
+
+The higher the SSC value, the stronger the trend in the data.
+
+$\text{SSC} = \sum (y_p - \bar{y})^2$
+
+(The closer the regression line is to the mean, the smaller the SSC value)
+
+#### The Sum of Squares with the Samples (SSE)
+NB. Residual -> the difference between the observed value and the predicted value (error)
+
+In regression, the equivalent of SSE is the variation in the $y$ variable that is unexplained by the regression line.
+
+High SSE means the model is poor at predicting $y$
+
+Low SSE means the model is good at predicting $y$ -> this is what we want!
+
+### The goodness of fit
+
+$$
+R^2 = \frac{\text{Regression sum of squares}}{\text{Total sum of squares}}
+\newline
+R^2 = \frac{\text{RSS}}{\text{TSS}}
+\newline
+R^2 = \frac{\text{Variation in } y \text{ that is explained by the regression line}}{\text{Total variation in the } y \text{ variable}}
+$$
+
+### Significance testing
+#### 1. The regression model as a whole
+ANOVA is used to test the statistical significance of R².
+
+Use ANOVA to find RSS and TSS.
+
+$R² = \frac{RSS}{TSS}$
+
+(N.B. R² is called Multiple R-squared in R output)
+
+The regression and residual (error) sum of squares are affected by the
+number of variables and observations respectively.
+
+So we need to remove these effects by calculating the variance terms.
+
+$$
+\text{Variance term} = \frac{\text{Sum of Squares}}{\text{Degrees of Freedom}}
+$$
+
+##### Degrees of Freedom for RSS and TSS
+$$
+\text{df (RSS)} = \text{Number of variables } (x + y) - 1
+\newline
+\newline
+\text{df (TSS)} = \text{Number of observations } - \text{Number of variables } (x + y)
+$$
+##### Snedecor’s Variance Ratio (_F_)
+$$
+F = \frac{\text{Variance term for Regression sum of squares}}{\text{Variance term for Error sum of squares}}
+$$
+E.g. p-value = 0.03374, so only reject H₀ at 0.05 level
+
+**The larger the F ratio the better the model**
+
+#### 2. The regression coefficents ($a + b$)
+Are the two regression co-efficients (a + b) statistically
+significant?
+
+The _t_ test is used to test the significance of the regression coefficients.
+
+$$
+t = \frac{\text{Value of coefficent}}{\text{Standard Error}}
+$$
+Standard error (SE): how far is co-efficient from true value?
+
+We want _t_ to be as high (positive or negative) as possible
+
+##### N.B. R Significance Codes
+`0 (99.99) ‘***’ 0.001 (99.9) ‘**’ 0.01 (99) ‘*’ 0.05 (95) ‘.’ 0.1 (90) ‘ ’ 1 (0)`
+
 ------------------------------------------------------------------------
 Last updated: `r Sys.Date()`
