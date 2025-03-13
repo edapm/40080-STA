@@ -122,7 +122,7 @@ summary(mod)
 
 
 #QUESTION: Based on the coefficient p-value and the model R-squared, do you
-#think CrimeRate10 is a good predictor of the current crime rate?
+#think CrimeRate10 is a good predictor of the current crime rate? YES
   
 ## Plotting a linear regression fit
 #We may wish to plot the fit of our regression model, and could be tempted to
@@ -157,7 +157,6 @@ plot(dat$CrimeRate10, dat$Crime_rate, pch = 16)
 lines(dat$CrimeRate10, f, lwd = 2, col = "red")
 
 abline(0,1)
-
 
 #QUESTION: looking at this abline, the fitted regression line and the
 #coefficient for CrimeRate10, does this make sense? What is this telling us?
@@ -218,7 +217,7 @@ points(new_dat$CrimeRate10, p, pch = 17,  cex = 3, col = "blue")
 
 #QUESTION: plotting like this shows us how far outside the range of our model
 #two of our predicted values are. Do you think it is sensible to extrapolate our
-#model so far to make predictions like this?
+#model so far to make predictions like this? No
   
 #**Well done - you can now run and interpret a simple linear model in R! Now,
 #work your way through the self-test exercise.**
