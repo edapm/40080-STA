@@ -423,7 +423,7 @@ The frequency distributions are different.
 
 #### Stage 2: Calculate expected counts
 
-The expected counts assumed that the two frequeny distributions are
+The expected counts assumed that the two frequency distributions are
 identical (H₀ is true).
 
 E.g. 1 person households
@@ -898,7 +898,7 @@ E.g. p-value = 0.03374, so only reject H₀ at 0.05 level
 **The larger the F ratio the better the model**
 
 #### 2. The regression coefficents ($a + b$)
-Are the two regression co-efficients (a + b) statistically
+Are the two regression coefficents (a + b) statistically
 significant?
 
 The _t_ test is used to test the significance of the regression coefficients.
@@ -912,6 +912,127 @@ We want _t_ to be as high (positive or negative) as possible
 
 ##### N.B. R Significance Codes
 `0 (99.99) ‘***’ 0.001 (99.9) ‘**’ 0.01 (99) ‘*’ 0.05 (95) ‘.’ 0.1 (90) ‘ ’ 1 (0)`
+
+# Statistics Lecture 09, 13/03/2025
+## Multiple Linear Regression
+### Introduction
+- Multiple linear regression is used when you have more than one predictor variable.
+
+N.B. You will need this for your coursework - it explains more of the variance than a simple regression model.
+
+$y=a+b_1x_1+b_2x_2$
+
+A good model needs to be "parsimonious" - it needs to be efficient
+
+A high R² value and a small number of $x$ variables (i.e. highest R² with fewest variables)
+
+R provides Akaike's Information Criteria (AIC)
+
+N.B. No more than four predictor variables for coursework model
+
+### Four Methods
+#### 1. Enter method (not very good)
+- Forces all variables into model, but retains the insignificant predictors
+
+#### 2. Forward method
+- Start with most significant variable first (based on p-value, strongest Pearson's correlation coefficient)
+- Add the next most significant variable etc.
+- Only retains significant predictors
+
+#### 3. Backward method (opposite of Forward)
+- Start with all variables in the model
+- Remove the least significant variable first
+- Remove the next least significant variable etc.
+- Only retains significant predictors
+
+#### 4. Stepwise method
+- A variation of the Forward method
+- Start with the most significant variable (closest to +1 or -1)
+- Add the next most significant variable, the one with the strongest correlation with $y$ that has not already been explained by the first variable
+- you want an R² value > 0.8
+- Removal test - may remove variables as the computer tries to find the combination which will give the R² value closest to 1
+- Choice of variables is done statistically ($\alpha = 0.05$)
+
+##### Disadvantages
+- Correlation does not imply causation (variable could be included even if there is not a logical relationship between $x$ and $y$)
+- Football manager analogy - you don't want all strikers, you need a balanced team
+
+##### Examples of Stepwise Regression
+###### Example 1
+- Percentage of wet days during the winter at 127 sites in Devon and Cornwall
+- Predictor variables: altitude, distance from the coast, latitude, longitude
+- Altitude is chosen first, so must be best predictor
+- Then latitude is chosen, but other predictors not significant
+- N.B. R only provides statistics about the final model
+- Altitude explains 23.3%, Latitude increases this to 29.8%, the rest is unexplained
+
+##### Adjusted R² Value
+- R² value is the sample coefficient of determination
+- Adjusted R² value is the population coefficient of determination
+- The adjusted R² value indicates the 'shrinkage' (loss of predictive power) when the model is applied to the population
+
+- A large difference (>5%) between R² and adjusted R² indicates that the model is poor
+  - Could be due to a small sample size (overfitting)
+  - Could be due to too many predictor variables used in the model
+- You don't want the model to "collapse" when applied to the population
+
+##### The standard error of the estimate (SEE)
+- A measure of average model error
+- The lower the SEE the better the model
+- N.B. This is called the residual standard error in R
+- Use ANOVA to calculate the SEE
+
+$$
+\text{SEE} = \sqrt{\frac{\text{Error Sum of Squares}}{n - 2}}
+$$
+Unstandardised Coefficients (called Estimate in R)\
+
+$t$-value - the higher the better
+
+Use this to write down the regression equation
+
+$$
+y = a \text{ (intercept)} + b_1x_1 + b_2x_2
+\newline
+\text{Rainfall} = 334.378 + (0.02995 \times \text{Altitude}) - (5.438 \times \text{Latitude})
+$$
+
+##### Checks to perform on regression coefficients
+- The coefficients should be statistically significant
+- The coefficients for each variable should be in the expected direction, the same as the correlation coefficient of the $y$ variable
+
+##### Unexpected outcomes in Multiple Regression
+- A variable that has a significant correlation with $y$ may not be significant in the regression model
+  - This particular $x$ variable is probably correlated with one of the
+other $x$ variables that is already in the model
+  - The $x$ variable is said to be "redundant" - only the most significant variable is retained
+- A variable that is not significantly correlated with $y$ may be significant in the regression model
+  - The variable is said to be "confounded" - it is correlated with one of the other $x$ variables that is already in the model
+  - The variable is retained in the model
+- N.B. Remove $W$ from the model in the rainfall coursework (not NAOI)
+
+##### Examples of Stepwise Regression (continued)
+###### Example 2
+- Variations in overcrowding ($y$) in 37 sites around Birmingham
+- Predictor variables: Percentage unemployment rate, Percentage of part-time workers, Percentage renting from council/housing association, Percentage of terraced housing, Percentage with access to good amenities, Percentage with no car
+
+- The model is built up stepwise
+- The computer selects % unemployment, % part-time workers, % in social housing
+- % No car skipped because it is confounded with % unemployment
+- R² value is 0.960
+
+$$
+y = a + b_1x_1 + b_2x_2 + b_3x_3
+\newline
+\text{Overcrowding} = 10.337 + (2.016 \times \text{Unemployment}) + (0.917 \times \text{Part-time workers}) + (0.109 \times \text{Social housing})
+$$
+Checks on regression coefficients -> all significant, but not all in the expected direction (to be explained next week)
+
+#### Visualising Multiple Regression Model
+- The regression line is in a higher dimension
+- The regression plane is the equivalent of the regression line in 3D
+
+![](https://dl.imgdrop.io/file/aed8b140-8472-4813-922b-7ce35ef93c9e/2025/03/13/image964c86bccff8681b.png)
 
 ------------------------------------------------------------------------
 Last updated: `r Sys.Date()`
