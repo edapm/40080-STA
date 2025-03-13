@@ -13,7 +13,7 @@
 #using e.g. the head() function.
 
 dat <- read.csv(file.choose())
-
+head(dat)
 
 
 ## ------------------------------------------------------------------------
@@ -27,13 +27,13 @@ dat <- read.csv(file.choose())
 #variables. Make the points red using the 'col' argument
 
 
-plot()
+plot(dat$CrimeRate10, dat$Education10, col = "red")
 
 
 ## ------------------------------------------------------------------------
 
 
-#Does there look to be a relationship between Education10 and CrimeRate10?
+#Does there look to be a relationship between Education10 and CrimeRate10? Nope
   
 
 ### linear regression
@@ -42,20 +42,26 @@ plot()
 #the model summary to investigate the model fit
 
 
-mod <- lm()
+mod <- lm(CrimeRate10 ~ Education10, data = dat)
 
 ## ------------------------------------------------------------------------
 
 
 #Is Education10 a significant predictor of Crime10? What does the model R2 and
-#p-value (of the F-statistic) tell us about this model?
-  
+#p-value (of the F-statistic) tell us about this model? Not significant
+mod
+summary(mod)
 
 ### Plotting the model fit
 #Repeat the above exercises but instead testing whether Wage10 (median weekly
-#wage ten years ago) is a significant driver of CrimeRate10.
+#wage ten years ago) is a significant driver of CrimeRate10. No it is not significant
 
+plot(dat$CrimeRate10, dat$Wage10, col="red")
 
+mod2 <- lm(CrimeRate10 ~ Wage10, data = dat)
+
+mod2
+summary(mod2)
 
 
 ## ------------------------------------------------------------------------
@@ -68,8 +74,13 @@ mod <- lm()
 #as a dark blue line. HINT: remember to use the fitted() function as a first
 #step on your model
 
+fitted_values <- fitted(mod2)
 
+plot(dat$Wage10, dat$CrimeRate10, pch = 16)
 
+lines(dat$Wage10, fitted_values, lwd=2, col="darkblue")
+
+abline(0,1)
 
 ## ------------------------------------------------------------------------
 
@@ -79,18 +90,20 @@ mod <- lm()
 #Using the plot of your model fit (dark blue line), estimate by hand what the
 #CrimeRate10 would be with a Wage10 value of 600. By hand I just mean find 600
 #along the x axis and go up to the regression line and then go across to the
-#y-axis and read off the value
+#y-axis and read off the value (100)
 
 #Now create a new dataframe with one column (Wage10) and one value in the column
 #(600) and use the predict function to get your model to predict exactly the
 #value of CrimeRate10.
 
+new_data <- data.frame(Wage10 = 600)
+predict(mod2, newdata = new_data)
 
 
 ## ------------------------------------------------------------------------
 
 
-#Does this match roughly what you got doing it by hand?
+#Does this match roughly what you got doing it by hand? yes
   
   
 ### Additional exercises
@@ -100,7 +113,12 @@ mod <- lm()
 #it green) on your model fit plot, using the xlim and ylim arguments to expand
 #the plot axes to fit this point in.
 
+new_data2 <- data.frame(Wage10 = 1000)
+predict(mod2, newdata = new_data2)
 
+plot(dat$Wage10, dat$CrimeRate10, pch = 16, xlim = c(0, 1100), ylim = c(0, 200))
+lines(dat$Wage10, fitted_values, lwd=2, col="darkblue")
+points(1000, predict(mod2, newdata = new_data2), col = "green", pch = 16)
 
 
 ## ------------------------------------------------------------------------
@@ -120,13 +138,13 @@ dat$Southern <- as.factor(dat$Southern)
 
 
 #Now have a go at using it in the plot function.
-
+plot(dat$Wage10, dat$CrimeRate10, pch=16, col = dat$Southern)
 
 
 ## ------------------------------------------------------------------------
 
 
-#Can you see what this has done?
+#Can you see what this has done? yes
   
   
   
