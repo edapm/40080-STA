@@ -45,23 +45,22 @@ head(dat)
 # model, and then extract (from the summary output object) and save the model R2
 # and model adjusted R2 values as different objects.
 
-l <- lm()
-
-
-
+l <- lm(data = dat, Crime_rate ~ .)
+sum_l <- summary(l)
+model_r2 <- sum_l$r.squared
+model_adjr2 <- sum_l$adj.r.squared
 
 # Have a look at this output - do you think we need all of these variables in here?
-
+# no
 
 #For our categorical predictor (Location), as discussed in the main practical,
 #we have multiple terms / coefficients in our model as it has three levels (E, C
 #and W) and it compares our E level (LocationE) to the base level (here C was
 #used) and our 2 level (LocationW) to the base level. Use the anova function to
 #have a look at the p-value for the categorical variable as a whole. Is it
-#significant at the 0.05 level?
+#significant at the 0.05 level? no
 
-
-  
+aov(l)
 
 ## Stepwise model selection
 
@@ -70,29 +69,28 @@ l <- lm()
 #argument to ensure if runs a stepwise selection. Save the step function output
 #as an object, and look at the summary() of this object.
 
-x <- 
+x <- step(l, direction = "both")
 summary(x)
 
 # What variables have been selected in this optimal model? Using the coefficient
 # sign (positive or negative) can you interpret this model output, i.e. how
-# these predictors affect the response variable (crime_rate)?
-
+# these predictors affect the response variable (crime_rate)? Youth, ExpenditureYear0, LabourForce, MatureUnemployment
+# Youth makes crime_rate go up, ExpenditureYear0 makes crime_rate go down, LabourForce makes crime_rate go down, MatureUnemployment makes crime_rate go up
 
 
 # Compare the R2 and adjusted R2 of this simplified model with the values from
 # your full model that you saved earlier. Do the changes make sense?
-  
+# yes
 
 
 # Use the drop1 function to test dropping the Youth variable from this
 # simplified model. What happens to the model AIC? Then use add1() to add back
 # in the Males variables. Based on this, is our model selection correct in
-# including Youth in the optimal model and excluding Males?
+# including Youth in the optimal model and excluding Males? Yes, the AIC is lower when Youth is included
 # Remember: a lower AIC means a better fitting model, and the model with the
 # added/removed variable is on the second row.
-
-
-
+drop1(x, "Youth")
+add1(x, "Males")
 
 ## Additional exercise
 # Often we are interested in how two variables interact. In short, this means
@@ -111,5 +109,7 @@ summary(x)
 # the interaction between them. Look at the summary of the this model and the
 # coefficient and significance of the interaction term. Was our hypothesis of an
 # interaction correct?
+y <- lm(data = dat, Crime_rate ~ ExpenditureYear0 * StateSize)
+summary(y)
 
-
+# No, the interaction term is not significant (p = 0.161)

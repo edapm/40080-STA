@@ -79,7 +79,7 @@ summary(mod1)
 
 #QUESTION: What is the model summary telling us about which variables might be
 #important, and how much of the overall variation is explained by our predictors
-#(Hint: remember the interpretation of R2)?
+#(Hint: remember the interpretation of R2)? doctor, hospital and income are all statistically significant
 
 #REMEMBER: A positive coefficient means that when the predictor increases, the
 #response increases and vice versa
@@ -233,7 +233,7 @@ step(mod1, direction = "both") # direction = both means it does stepwise (rather
 
 #QUESTION: what two variables are left in our simplified / optimal model? Does
 #this match with the coefficients and p-values you saw in our full model, i.e.
-#when we ran summary(mod1)
+#when we ran summary(mod1) doctor, income (but not hospital)
 
 #N.B., if you store the step function output as an object, it only saves the
 #final / optimal model
