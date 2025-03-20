@@ -4,6 +4,8 @@ author: "Ed Mason"
 output: 
   html_document:
     toc: true
+    toc_depth: 4
+    toc_float: true
 editor_options: 
   markdown: 
     wrap: 72
@@ -1033,6 +1035,128 @@ Checks on regression coefficients -> all significant, but not all in the expecte
 - The regression plane is the equivalent of the regression line in 3D
 
 ![](https://dl.imgdrop.io/file/aed8b140-8472-4813-922b-7ce35ef93c9e/2025/03/13/image964c86bccff8681b.png)
+
+# Statistics Lecture 10, 20/03/2025
+## Multiple Linear Regression: Testing the assumptions of a regression model
+### Note on Coursework
+- R² value is high -> not enough
+- Need to test the assumptions
+
+### Five Assumptions
+#### 1. Linearity
+- The relationship between the dependent and independent variables should be linear
+
+##### Checking Linearity
+1. Plot the data
+2. Look at the correlation coefficients between each independent variable and the dependent variable (assumption is satisfied if $p < 0.05$)
+3. Use a diagnostic plot (residuals vs fitted values) - residuals should be randomly scattered around the line of best fit for linear data. However, if there is a trend in the points, the assumption is violated
+
+##### Dealing with non-linearity
+- Transform the data (e.g. log transformation, or square root transformation)
+- Use a non-linear regression model
+
+#### 2. Multicollinearity
+- There is no severe correlation between the independent variables in the model
+- The model will be unstable if variable effects are not separate
+- Avoid multicollinearity by ensuring that the predictor variables are not strongly correlated (i.e. if the correlation is very close to ±1)
+- Look at correlation coefficients between the independent variables (assumption is satisfied if $p < 0.05$)
+- $r > 0.8$ or $r < -0.8$ is a problem
+
+E.g. $W$ redundant variable, $\text{NAOI}$ is chosen in physical coursework
+
+##### Helpful diagnostics for multicollinearity
+1. Variance Inflation Factor (VIF)
+- a measure of how much the variance of the estimated regression coefficients is increased due to multicollinearity
+- Problem when VIF > 5
+  
+2. Tolerance
+- Varies between 0 and 1
+- The lower the tolerance, the more likely there is multicollinearity
+- Problem when tolerance < 0.2
+
+##### Dealing with multicollinearity
+- Remove one of the correlated variables
+- Remove independent variable with the weakest association with the dependent variable
+
+#### 3. Outliers
+- Outliers in data -> outliers in model
+- Outliers can have a large effect on the regression line
+
+- Two types of outliers
+  - High residual ($y$)
+  - High leverage point ($x$)
+  
+##### Residuals
+
+$\text{Residual} = \text{observed value} - \text{predicted value}$
+
+- Positive residual -> observed value is higher than predicted value (underestimate)
+- Negative residual -> observed value is lower than predicted value (overestimate)
+
+- Higher residual (+ or -) means a larger error in the model
+
+###### Standardised residuals
+- A measure of how many standard deviations the residual is from the mean
+
+$\text{Standardised residuals} = \frac{\text{Unstandardised residuals}}{\text{standard error}}$
+
+- Problem if standardised residuals > ±2
+- If standardised > ±3, these are called extreme standardised residuals
+
+###### Normality of residuals
+- The residuals should be normally distributed if the regression model is satisfactory
+- If the residual distribution is highly skewed, the model has a systematic error
+- Plot histogram and perform a test (e.g. Shapiro-Wilk test or Kolmogorov-Smirnov test)
+
+- Q-Q plot (one of the four diagnostic plots)
+  - If the residuals are normally distributed, the points will fall on the line
+  - If the residuals are not normally distributed, the points will deviate from the line
+
+##### Leverage points
+- The regression equation can also be distorted by unusual indepedent variables
+- This results in the pulling of the regression line round to a different slope
+
+###### What is a high leverage point (HLP)?
+
+$\text{HLP} > \frac{3k}{n}$
+
+- $k$ = number of independent variables
+- $n$ = number of observations
+
+##### Cook's distance
+- A measure of how much the regression coefficients change when the $i$th observation is removed (combines leverage and residual information)
+- Cases with a Cook's distance > 1 are considered problematic
+
+##### Tips
+- Don't remove more than 3-4 outliers
+
+#### 4. Homoscedasticity
+- Unequal errors
+- The residuals should be equally spread around the regression line (homoscedastic errors)
+- Plot standardised residuals vs standardised independent variable
+- If the residuals are equally spread, the assumption is satisfied (homoscedasticity), but if the residuals show a pattern, the assumption is violated (heteroscedasticity)
+
+#### 5. Autocorrelation
+- The residuals should be randomly distributed in time and in space
+- Temporal autocorrelation -> The error of the model in one year must be independent of the error in previous years (e.g. in Rainfall project)
+- Spatial autocorrelation -> the error in one location must be independent of the error in another location
+
+##### Testing for temporal autocorrelation
+- Autocorrelation function (ACF) or autocorrelogram
+- ACF varies between +1 and -1
+- ACF should be close to 0 (a 'clean' ACF)
+- Problem if ACF > ±0.2 (a 'dirty' ACF)
+
+###### Durbin-Watson test
+- A test for temporal autocorrelation
+- The test statistic varies between 0 and 4
+- The closer to 2, the less likely there is autocorrelation
+- Problem if Durbin-Watson < 1 or > 3
+
+##### Testing for spatial autocorrelation
+- Plot residuals as a map
+- The map should be random (no patterns)
+- Otherwise, suggests missing variable in model
 
 ------------------------------------------------------------------------
 Last updated: `r Sys.Date()`
