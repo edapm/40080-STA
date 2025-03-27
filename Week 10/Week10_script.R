@@ -48,6 +48,7 @@ plot(marketing$youtube, marketing$sales)
 lines(marketing$youtube, fitted(mod))
 
 #QUESTION: what is the model telling us? What is the model R2, the coefficient, P-value etc
+# R2 = 0.6099, coefficient = 0.047..., p-value = 2.2e-16 (significant!)
 
 ## Re-cap on residuals 
 #Formally, a residual is the vertical distance between a data point and the
@@ -112,7 +113,7 @@ shapiro.test(r)
 #QUESTION: does this test indicate the residuals are normally distributed?
 #Remember from your previous practicals, that the NULL hypothesis in this test
 #is that the data are normally distributed, i.e. we want a non-significant
-#P-value
+#P-value = 0.2133, so we can accept the null hypothesis that the residuals are normally distributed
 
 
 #what can you do if this assumption is not met?
@@ -142,6 +143,7 @@ shapiro.test(r)
 plot(mod, 1)
 
 #QUESTION: Do you think we are OK with this model according to the plot?
+# yes, line is straight (mostly)
 
 #what can you do if this assumption is not met?
 #1. you can try (log) transforming your response variable to see if this linearises the relationship (see above)
@@ -178,7 +180,7 @@ plot(mod, 1)
 
 plot(mod, 3)
 
-#QUESTION: Can you interpret this plot? Does it match up with our conclusion from the previous plot?
+#QUESTION: Can you interpret this plot? Does it match up with our conclusion from the previous plot? Yes, plot has positive slope
 
 #what can you do if this assumption is not met?
 #1. you can try (log) transforming your response variable (see above)
@@ -215,7 +217,7 @@ plot(mod, 4)
 
 plot(mod, 5)
 
-#QUESTION: do we have any points that have standardized residuals marking them out as outliers?
+#QUESTION: do we have any points that have standardized residuals marking them out as outliers? No
 
 #what can you do if this assumption is not met?
 #You can inspect these points and think about why they are extreme values. Was
@@ -247,7 +249,7 @@ plot(mod, 5)
 
 cor(marketing)
 
-#QUESTION: are any of the three variables (youtube, facebook, newspaper) highly correlated?
+#QUESTION: are any of the three variables (youtube, facebook, newspaper) highly correlated? youtube/sales = 0.78, facebook/sales = 0.22, newspaper/sales = 0.22
 
 #You can also plot the pairwise relationships between all variables, which should match up
 #with the interpretation of the cor() matrix.
@@ -273,14 +275,13 @@ summary(mod2)
 #model match up with what we would have considered to be important predictors
 #based on the Pearson's correlations between each individual predictor and
 #'sales', that we generated above.
-
+# youtube and facebook highly significant, newspaper is not
 
 #As a final step, lets calculate the Tolerance statistic to do one final 
 #check for multicollinearity. For this, we use the full model object,
 #and we need to install a new package to use the correct function
 
-install.packages("olsrr")
-
+# install.packages("olsrr")
 library(olsrr)
 
 ols_vif_tol(mod2)
@@ -290,7 +291,7 @@ ols_vif_tol(mod2)
 #issues with multicollinearity.
 
 #QUESTION: do the tolerance values here indicate we have any problems with
-#multicollinearity? Does this match with the simple cor() test we used above?
+#multicollinearity? Does this match with the simple cor() test we used above? Yes, no issues
 
 
 #  **Well done - you can now tests the assumptions of linear regression in R! Now,  

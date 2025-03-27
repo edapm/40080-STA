@@ -12,31 +12,31 @@
 # from: https://www.scribbr.com/statistics/linear-regression-in-r/
 
 # Load it in and call it 'dat'. Have a look at it using the head() function.
-
+dat <- read.csv(file.choose(), header = TRUE)
 
 # First, fit a simple linear model (call it mod) using heart.disease as your
 # response variable and biking as your single predictor variable. And then look
 # at the summary and plot the fit of the model using code learnt in previous
 # practicals
-
-
+mod <- lm(heart.disease ~ biking, data = dat)
+summary(mod)
+plot(heart.disease ~ biking, data = dat)
+lines(dat$biking, fitted(mod), col = "red")
 
 # QUESTION: based on this plot, does there appear to be a linear relationship
 # between biking and heart.disease? Remember, a linear relationship can be
 # positive or negative. Can you interpret the model summary output and what it
-# is telling us?
-
-
+# is telling us? Negative linear relationship between biking and heart disease
 
 ## Testing assumptions
 # Now, using this model test the assumptions of linear regression you went over
 # in the main practical. First, check the normality of the residuals assumption
 # by looking at the QQ plot and by running a Shapiro Wilks test.
-
-
+plot(mod, 2)
+shapiro.test(resid(mod))
 
 # QUESTION: Based on the QQ plot and the shapiro.test, do you think we have
-# violated the residual normality assumption?
+# violated the residual normality assumption? Normality assumption violated
 
 
 # To try and deal with this violation of normality, first have a look at
@@ -46,7 +46,8 @@
 # Remember - a number like 2.2e-16 is very small!
 
 mod2 <- lm(log(heart.disease) ~ biking, data = dat)
-
+plot(mod2, 2)
+shapiro.test(resid(mod2))
 
 
 
@@ -60,15 +61,17 @@ mod2 <- lm(log(heart.disease) ~ biking, data = dat)
 
 cor.test(dat$biking, dat$smoking) #QUESTION: how does this look?
 
-mod3 <- lm()
+mod3 <- lm(heart.disease ~ biking + smoking, data = dat)
+plot(mod3, 2)
+shapiro.test(resid(mod3))
 
 
-# QUESTION: Has including smoking improved things in terms of normality?
+# QUESTION: Has including smoking improved things in terms of normality? yes
 
 # Now examine the linearity assumption and the homogeneity of (residual)
 # variance assumption using the relevant plots we went over in the practical,
 # using this new 'mod3'. 
-
+plot(mod3, 1)
 
 
 ## Additional exercise 1
@@ -76,7 +79,7 @@ mod3 <- lm()
 # using mod3, look at the relevant plots for checking for influential outliers.
 # Do you think there is any problems with outliers in our model? Remember to
 # look at the Cook's distance values and the standardised residuals values.
-
+plot(mod3, 4)
 
 # To illustrate what an outlier problem looks like have a go at running the
 # following lines, and then re-making the plots. The first line is adding a new
@@ -92,6 +95,7 @@ mod3 <- lm(heart.disease ~ biking + smoking, data = dat2)
 
 # Look at the Cook's distance and standardized residual of this new point. You
 # can now see what a true influential outlier looks like!
+plot(mod3, 4)
 
 ## Additional exercise 2
 
@@ -115,10 +119,11 @@ testMod <- lm(observedResponse ~ Environment1, data = testData)
 #Now run the durbin watson test on this model's residuals (remember, we just give the
 #function the model, it extracts the residuals itself)
 library(car)
+durbinWatsonTest(testMod)
 
 
 # QUESTION: based on the DW statistic and p-value do we have significant temporal
-# autocorrelation here? Is it positive or negative.
+# autocorrelation here? Is it positive or negative. No, D-W should be > |2|
 
 
 
