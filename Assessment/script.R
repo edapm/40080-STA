@@ -1,4 +1,7 @@
 library(tidyverse)
+library(car)
+library(mctest)
+library(olsrr)
 
 data <- read.csv("data.csv", header=T, sep=",")
 
@@ -9,3 +12,7 @@ summary(mod_step)
 plot(mod_step)
 
 hist(mod_step$residuals)
+ols_vif_tol(mod_step)
+mod_step <- update(mod_step, ~.-w)
+
+summary(mod_step)
