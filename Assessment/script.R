@@ -3,16 +3,25 @@ library(car)
 library(mctest)
 library(olsrr)
 
+rm(list=ls())
+
 data <- read.csv("data.csv", header=T, sep=",")
 
+# initial stepwise
 mod <- lm(rainfall~., data = data)
 mod_step <- step(mod, direction = "both")
 
+# summary
 summary(mod_step)
-plot(mod_step)
 
+# assumptions
 hist(mod_step$residuals)
 ols_vif_tol(mod_step)
-mod_step <- update(mod_step, ~.-w)
 
-summary(mod_step)
+# new model (mc violated)
+mod_step_2 <- update(mod_step, ~.-w)
+
+# assumptions (model #2)
+summary(mod_step_2)
+hist(mod_step_2$residuals)
+ols_vif_tol(mod_step_2)
