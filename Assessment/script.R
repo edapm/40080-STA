@@ -29,6 +29,7 @@ summary(mod_step_2)
 plot(mod_step_2) # diagnostic plots
 ols_vif_tol(mod_step_2) # multicollinearity
 hist(mod_step_2$residuals) # normality of residuals
+shapiro.test(mod_step_2$residuals) # normality of residuals
 plot(mod_step_2$residuals, data$mslp) # homoscedasticity
 plot(mod_step_2$residuals, data$brestzon) # homoscedasticity
 plot(mod_step_2$residuals, data$naoi) # homoscedasticity
