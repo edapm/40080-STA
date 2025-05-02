@@ -2,6 +2,7 @@ library(tidyverse)
 library(car)
 library(mctest)
 library(olsrr)
+library(tseries)
 
 rm(list=ls())
 
@@ -15,13 +16,20 @@ mod_step <- step(mod, direction = "both")
 summary(mod_step)
 
 # assumptions
-hist(mod_step$residuals)
-ols_vif_tol(mod_step)
+plot(mod_step) # diagnostic plots
+ols_vif_tol(mod_step) # multicollinearity
 
-# new model (mc violated)
+# new model (multicollinearity assumption violated)
 mod_step_2 <- update(mod_step, ~.-w)
 
-# assumptions (model #2)
+# summary (model #2)
 summary(mod_step_2)
-hist(mod_step_2$residuals)
-ols_vif_tol(mod_step_2)
+
+# assumptions (model #2)
+plot(mod_step_2) # diagnostic plots
+ols_vif_tol(mod_step_2) # multicollinearity
+hist(mod_step_2$residuals) # normality of residuals
+plot(mod_step_2$residuals, data$mslp) # homoscedasticity
+plot(mod_step_2$residuals, data$brestzon) # homoscedasticity
+plot(mod_step_2$residuals, data$naoi) # homoscedasticity
+durbinWatsonTest(mod_step_2) # autocorrelation
